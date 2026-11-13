@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 3 Design Board — Monsterraunt</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #111012;
+      background-image: radial-gradient(circle at 50% 0%, #2a1418 0%, #111012 75%);
+      color: #f5f2f2;
+      min-height: 100vh;
+      padding: 48px 20px;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: rgba(220, 38, 38, 0.16);
+      color: #f87171;
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      color: #c7bebe;
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .boards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .board-card {
+      background-color: #18161a;
+      border: 1px solid #30282b;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.55);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .board-card:hover {
+      border-color: #991b1b;
+    }
+
+    .board-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #2b2326;
+    }
+
+    .board-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .brief-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background-color: #241d20;
+      color: #e2d5d7;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #3d2e33;
+    }
+
+    .board-img-wrap {
+      background-color: #0d0c0e;
+      border: 1px solid #2b2326;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .board-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .board-img-wrap:hover img {
+      transform: scale(1.01);
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background-color: rgba(15, 13, 16, 0.85);
+      color: #f3e8e8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      pointer-events: none;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      cursor: zoom-out;
+      overflow-y: auto;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 96%;
+      max-height: 94vh;
+      border: 2px solid #453439;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Level 3 Design Portfolio</span>
+      <h1>Monsterraunt — Design Board</h1>
+      <p class="subtitle">
+        A monster and fantasy-themed evening restaurant concept blending Asian cuisine with Dungeons &amp; Dragons presentation—spanning brand identity, character design, 3D interior setting, kiosk UI, promotional illustration, and merchandise[cite: 67, 68, 69]. Click any board panel to inspect at full resolution.
+      </p>
+    </header>
+
+    <main class="boards-stack">
+      <!-- Panel 1 -->
+      <article class="board-card">
+        <div class="board-header">
+          <h2 class="board-title">Panel 1 — Proposal, Logo &amp; Character Design</h2>
+          <div class="brief-tags">
+            <span class="tag">Proposal &amp; Inspiration</span>
+            <span class="tag">Brief 1: Logo</span>
+            <span class="tag">Brief 2: Character Design (Valeri &amp; Renee)</span>
+          </div>
+        </div>
+        <div class="board-img-wrap" onclick="openLightbox(this)">
+          <img src="board3%20(1)-1.png" alt="Level 3 Design Board Panel 1 - Proposal, Logo, and Character Design">
+          <span class="zoom-hint">Click to zoom</span>
+        </div>
+      </article>
+
+      <!-- Panel 2 -->
+      <article class="board-card">
+        <div class="board-header">
+          <h2 class="board-title">Panel 2 — Interior Setting &amp; Kiosk Menu UI</h2>
+          <div class="brief-tags">
+            <span class="tag">Brief 3: Setting</span>
+            <span class="tag">Brief 4: Kiosk Menu</span>
+          </div>
+        </div>
+        <div class="board-img-wrap" onclick="openLightbox(this)">
+          <img src="board3%20(1)-2.png" alt="Level 3 Design Board Panel 2 - Setting and Kiosk Menu">
+          <span class="zoom-hint">Click to zoom</span>
+        </div>
+      </article>
+
+      <!-- Panel 3 -->
+      <article class="board-card">
+        <div class="board-header">
+          <h2 class="board-title">Panel 3 — Key Illustration &amp; Keychain Merchandise</h2>
+          <div class="brief-tags">
+            <span class="tag">Brief 5: Illustration</span>
+            <span class="tag">Brief 6: Keychain Designs</span>
+          </div>
+        </div>
+        <div class="board-img-wrap" onclick="openLightbox(this)">
+          <img src="board3%20(1)-3.png" alt="Level 3 Design Board Panel 3 - Illustration and Keychain Designs">
+          <span class="zoom-hint">Click to zoom</span>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Full resolution design board panel">
+  </div>
+
+  <script>
+    function openLightbox(wrapElement) {
+      const img = wrapElement.querySelector('img');
+      if (img) {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+      }
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
