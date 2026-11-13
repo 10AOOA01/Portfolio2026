@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Writing — Portfolio Archive</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #111015;
+      background-image: radial-gradient(circle at 50% 0%, #231e30 0%, #111015 75%);
+      color: #f2eff7;
+      min-height: 100vh;
+      padding: 44px 20px;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: rgba(167, 139, 250, 0.14);
+      color: #c4b5fd;
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      color: #b4adc4;
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .stories-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .story-card {
+      background-color: #191722;
+      border: 1px solid #2e293d;
+      border-radius: 14px;
+      padding: 28px 30px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-2px);
+      border-color: #5b4b8a;
+    }
+
+    .story-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .story-rank {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a78bfa;
+      margin-bottom: 4px;
+    }
+
+    .story-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background-color: #242031;
+      color: #d4cde3;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #39324d;
+    }
+
+    .synopsis {
+      color: #c9c3d6;
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+    }
+
+    .excerpt {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      background-color: #13111a;
+      border-left: 3px solid #8b5cf6;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #b4adc4;
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #7c3aed;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .read-btn:hover {
+      background-color: #8b5cf6;
+      transform: translateY(-1px);
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: transparent;
+      color: #d4cde3;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      border: 1px solid #3e3754;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #242031;
+      color: #ffffff;
+      border-color: #6d5cae;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Narrative &amp; Fiction Portfolio</span>
+      <h1>Creative Writing — Top 3 Works</h1>
+      <p class="subtitle">
+        A curated showcase of my top three fiction projects spanning dark fantasy, character-driven adventure, and original worldbuilding.
+      </p>
+    </header>
+
+    <main class="stories-grid">
+      <!-- Story 1 -->
+      <article class="story-card">
+        <div class="story-top">
+          <div>
+            <div class="story-rank">Top Work #1</div>
+            <h2 class="story-title">Deepwoken: The Depths' Cradle</h2>
+          </div>
+          <div class="tags">
+            <span class="tag">Dark Fantasy</span>
+            <span class="tag">16 Pages</span>
+            <span class="tag">Prologue + 10 Chapters</span>
+          </div>
+        </div>
+        <p class="synopsis">
+          Found as an unharmed infant outside the protective barrier of Castle Light, a nameless Capra apprentice named Arthur Mirad is recruited by Klaris to uncover a traitor within the Second Layer expedition—all while preparing for the deadly Citadel Trials and confronting a terrifying entity haunting his dreams.
+        </p>
+        <blockquote class="excerpt">
+          "The infant fell from the surface, and landed upon the desolate and ruined ground of Scyphozia. Possessing no thought and no awareness of its surroundings, the baby wailed and wailed, deep into the endless void it was surrounded by."
+        </blockquote>
+        <div class="actions">
+          <a class="read-btn" href="Deepwoken_%20The%20Depths'%20Cradle.pdf" target="_blank" rel="noopener noreferrer">
+            Read Story (PDF)
+          </a>
+          <a class="download-btn" href="Deepwoken_%20The%20Depths'%20Cradle.pdf" download>
+            Download PDF
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 2 -->
+      <article class="story-card">
+        <div class="story-top">
+          <div>
+            <div class="story-rank">Top Work #2</div>
+            <h2 class="story-title">Minecraft: A-01</h2>
+          </div>
+          <div class="tags">
+            <span class="tag">Adventure / Slice of Life</span>
+            <span class="tag">4 Pages</span>
+            <span class="tag">Short Story</span>
+          </div>
+        </div>
+        <p class="synopsis">
+          After returning from a routine gold-bartering run at a Piglin bastion in the Nether with a mysterious bottle of shimmering amber liquid, A-01 heads back to her Overworld settlement—where an unusually warm nightcap leads to a quiet, late-night turning point with her roommate.
+        </p>
+        <blockquote class="excerpt">
+          "A-01 moved through the azure forest with the quiet confidence of someone who had mapped every twisted vine and basalt ridge a dozen times over."
+        </blockquote>
+        <div class="actions">
+          <a class="read-btn" href="Minecraft_%20A-01.pdf" target="_blank" rel="noopener noreferrer">
+            Read Story (PDF)
+          </a>
+          <a class="download-btn" href="Minecraft_%20A-01.pdf" download>
+            Download PDF
+          </a>
+        </div>
+      </article>
+
+      <!-- Story 3 -->
+      <article class="story-card">
+        <div class="story-top">
+          <div>
+            <div class="story-rank">Top Work #3</div>
+            <h2 class="story-title">Skies of Aetheris: Nebula, A Void Within</h2>
+          </div>
+          <div class="tags">
+            <span class="tag">Original Fantasy</span>
+            <span class="tag">5 Pages</span>
+            <span class="tag">Chapter 1</span>
+          </div>
+        </div>
+        <p class="synopsis">
+          As tensions between the rival Sun and Moon factions threaten to erupt across the luminous Star Bridge, Moon's second-in-command Nebula wrestles with an unsettling darkness stirring inside him—until an unexpected meeting with Sun's cheerful apprentice, Star, blurs the boundary between enemies.
+        </p>
+        <blockquote class="excerpt">
+          "The quiet swish of clouds hummed through the air, carrying a serene melody. Stars twinkled gently in the section of the sky claimed by the Moon faction, casting a soft glow over the land."
+        </blockquote>
+        <div class="actions">
+          <a class="read-btn" href="Skies%20of%20Aetheris_%20Nebula,%20A%20Void%20Within.pdf" target="_blank" rel="noopener noreferrer">
+            Read Story (PDF)
+          </a>
+          <a class="download-btn" href="Skies%20of%20Aetheris_%20Nebula,%20A%20Void%20Within.pdf" download>
+            Download PDF
+          </a>
+        </div>
+      </article>
+    </main>
+  </div>
+
+</body>
+</html>
