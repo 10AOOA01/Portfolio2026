@@ -1,0 +1,605 @@
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A New Kind of Love — 2.5 Media Studies Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #141318;
+      --card-bg: #1e1c24;
+      --accent: #d88ca8;
+      --accent-blue: #7aa2f7;
+      --text-main: #f4f4f6;
+      --text-muted: #a9a7b5;
+      --border: #2f2c3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background: radial-gradient(circle at top, #231f2e 0%, var(--bg-color) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+      gap: 2.5rem;
+    }
+
+    header {
+      text-align: center;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+    }
+
+    .section-block {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .section-header span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Video Section */
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .timestamp-bar {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timestamp-bar .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-right: 0.35rem;
+    }
+
+    .chip-btn {
+      background: #26232e;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--accent);
+      background: #302c3a;
+    }
+
+    /* Storyboard Flipbook Stage */
+    .stage {
+      width: 100%;
+      perspective: 1800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+
+    .book-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 12px 0 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .book-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 28px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.04) 60%, transparent);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #ffffff;
+      transform-origin: left center;
+      transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+    }
+
+    .flip-out-next {
+      transform: rotateY(-28deg) scale(0.97);
+      opacity: 0.15;
+    }
+
+    .flip-out-prev {
+      transform: rotateY(22deg) scale(0.97);
+      opacity: 0.15;
+    }
+
+    .click-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .book-wrapper:hover .click-zone {
+      opacity: 1;
+    }
+
+    .zone-prev {
+      left: 0;
+      justify-content: flex-start;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 45%);
+    }
+
+    .zone-next {
+      right: 0;
+      justify-content: flex-end;
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.12), transparent 45%);
+    }
+
+    .zone-badge {
+      background: rgba(20, 19, 24, 0.78);
+      color: #fff;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .info-bar {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .shot-details h3 {
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .shot-details p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .page-counter {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(216, 140, 168, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(216, 140, 168, 0.25);
+    }
+
+    .controls {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .controls button, .controls select {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .controls button:hover:not(:disabled), .controls select:hover {
+      background: #282532;
+      border-color: var(--accent);
+    }
+
+    .controls button:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .controls button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .controls button.primary {
+      background: linear-gradient(135deg, #b86b88, #6b88c9);
+      border: none;
+      font-weight: 600;
+    }
+
+    .controls button.primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 999px;
+      margin-top: 0.85rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.25s ease;
+    }
+
+    footer {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    kbd {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>A New Kind of Love</h1>
+    <p>2.5 Media Studies &bull; Music Video &amp; Storyboard Flipbook by AJ and Amelia</p>
+  </header>
+
+  <!-- TOP SECTION: MUSIC VIDEO -->
+  <section class="section-block" aria-label="Music Video">
+    <div class="section-header">
+      <h2>1. Final Music Video</h2>
+      <span>Frou Frou — A New Kind of Love (4:24)</span>
+    </div>
+
+    <div class="video-wrapper">
+      <video id="musicVideo" controls preload="metadata" playsinline>
+        <source src="MVI_2359_4 (1).mp4" type="video/mp4" />
+        Your browser does not support the HTML5 video tag.
+      </video>
+    </div>
+
+    <div class="timestamp-bar">
+      <span class="label">Jump to section:</span>
+      <button class="chip-btn" data-time="0" data-slide="0">0:00 Intro</button>
+      <button class="chip-btn" data-time="21" data-slide="4">0:21 Verse 1 (Montage)</button>
+      <button class="chip-btn" data-time="50" data-slide="10">0:50 Chorus 1</button>
+      <button class="chip-btn" data-time="79" data-slide="13">1:19 Verse 2 ("Running late")</button>
+      <button class="chip-btn" data-time="138" data-slide="23">2:18 Bridge ("I've been busy")</button>
+      <button class="chip-btn" data-time="170" data-slide="28">2:50 Final Chorus</button>
+      <button class="chip-btn" data-time="211" data-slide="32">3:31 Outro ("Let me feel it")</button>
+    </div>
+  </section>
+
+  <!-- BOTTOM SECTION: INTERACTIVE STORYBOARD FLIPBOOK -->
+  <section class="section-block" aria-label="Storyboard Flipbook">
+    <div class="section-header">
+      <h2>2. Storyboard Flipbook</h2>
+      <span>39 Slides &bull; Scenes 1–10</span>
+    </div>
+
+    <main class="stage">
+      <div class="book-wrapper" id="bookWrapper" title="Click left side for Previous, right side for Next">
+        <div class="click-zone zone-prev" id="zonePrev">
+          <span class="zone-badge">&larr; Previous</span>
+        </div>
+        <img
+          id="slideImage"
+          class="slide-image"
+          src="Copy of 2.5 Storyboard - A New Kind of Love-01.png"
+          alt="Storyboard Slide 1"
+        />
+        <div class="click-zone zone-next" id="zoneNext">
+          <span class="zone-badge">Next &rarr;</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="info-bar">
+        <div class="shot-details">
+          <h3 id="slideTitle">Title Slide — A New Kind of Love</h3>
+          <p id="slideNote">2.5 Media Studies Storyboard by AJ and Amelia (Frou Frou)</p>
+        </div>
+        <div class="page-counter" id="pageCounter">Page 1 / 39</div>
+      </div>
+
+      <div class="controls">
+        <button id="firstBtn" title="Jump to start">&#x23EE; Start</button>
+        <button id="prevBtn">&larr; Previous</button>
+        <select id="sceneSelect" aria-label="Jump to slide"></select>
+        <button id="nextBtn" class="primary">Next Page &rarr;</button>
+      </div>
+    </main>
+  </section>
+
+  <footer>
+    Tip: Click the right/left side of the storyboard page, use the buttons, or press <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> arrow keys to flip pages.
+  </footer>
+
+  <script>
+    const slides = [
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-01.png", title: "Title Slide — A New Kind of Love", note: "2.5 Media Studies – Storyboard by AJ and Amelia" },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-02.png", title: "Scene 1 Shot 1 — Jack at the Beach", note: "Natural, early morning soft light to create a sense of isolation." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-03.png", title: "Scene 2 Shots 1–2 — Jack's Bedroom & Photo of Avery", note: "Low-key cool toned lighting; computer screen shining on Jack's face. Close-up on Avery's photo." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-04.png", title: "Scene 2 Shot 3 — Computer Screen", note: "Computer screen recording as Jack opens the folder of memories." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-05.png", title: "Scene 3 Shot 1 — Videos of Avery (Montage Starts)", note: "Warm, golden hour sunlight with pinkish overlays; more saturated and brighter throughout montage." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-06.png", title: "Scene 3 Shots 2–3 — Avery on Swing & Matching Eyes", note: "Avery on the swing; Jack matching an object (marble) to Avery's eyes." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-07.png", title: "Scene 3 Shots 4–5 — Claw Machine & Photo Booth", note: "Arcade lighting on Avery at the claw machine, followed by the photo booth strip." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-08.png", title: "Scene 3 Shots 6–7 — Beach Path & Bench", note: "Avery walking on the beach path and sitting on the bench." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-09.png", title: "Scene 3 Shot 7 — Beach Scene", note: "Avery drawing a heart in the sand with a stick." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-10.png", title: "Scene 4 Shots 1–2 — Closing the Folder & Leaving Room", note: "Room remains dim as video closes; bright natural light spills in as Jack opens the door." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-11.png", title: "Scene 4 Shot 4 — Jack at the Beach", note: "Late afternoon natural sunlight as Jack checks his phone." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-12.png", title: "Scene 4 Shot 5 — Contemplating Texting Avery", note: "Jack holds his phone and photo, debating whether to reach out." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-13.png", title: "Scene 4 Shots 6–7 — 'Wanna hang?' / 'ok.'", note: "Jack texts 'Wanna hang?' and Avery responds unenthusiastically." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-14.png", title: "Scene 5 Shots 1–2 — Waiting by the Lamp Post", note: "Lighting shifts from soft natural light to sunset and evening; Avery arrives just as Jack is about to leave." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-15.png", title: "Scene 5 Shots 3–4 — Pink vs. Blue Tones", note: "Jack's side is pinkish toned; Avery is stiff and her side is bluish toned." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-16.png", title: "Scene 5 Shot 5 — University Schedule", note: "Avery shows Jack her university schedule." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-17.png", title: "Scene 5 Shots 6–7 — Colour Shift to Darker Blue", note: "Jack checks the time and points to go somewhere; Avery walks into Jack's side under a darker blue tone." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-18.png", title: "Scene 5 Shots 8–9 — Fingers Crossed", note: "Avery follows Jack, dragging behind with her fingers crossed." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-19.png", title: "Scene 6 Shots 1–2 — On the Bench at Dusk", note: "Just past sunset with darker blue shadows; Jack looks at Avery who is distracted on her phone." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-20.png", title: "Scene 6 Shots 3–4 — Disappointment & Defeat", note: "Jack looks back at the view disappointed; his head lowers in defeat." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-21.png", title: "Scene 6 Shots 5–6 — Avery Leaves", note: "Avery turns and walks away, waving goodbye." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-22.png", title: "Scene 6 Shots 7–8 — Jack Alone", note: "Jack sits alone on the bench before walking in the opposite direction." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-23.png", title: "Scene 7 Shots 1–2 — University Study Room", note: "Dim, dull functional lighting; Jack focuses on his phone rather than studying." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-24.png", title: "Scene 7 Shots 4–5 — Heated Text Argument", note: "Zoom in on argument messages; Jack slumps over his desk as phone light shines." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-25.png", title: "Scene 7 Shots 6–7 — 'This isn't working out'", note: "Avery sends 'This isn't working out'; opaque visual transition." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-26.png", title: "Scene 7 Shots 8–9 — Packing Up", note: "Jack stuffs his papers into his bag and stares at his phone." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-27.png", title: "Scene 7 Shots 10–11 — Checking the Message", note: "Mid shot as Jack checks his phone; screen light illuminates his face." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-28.png", title: "Scene 7 Shot 11 & Scene 8 Shot 1 — 'We're over'", note: "Avery texts 'We're over'; Jack leaves university past fading memories on the stairs." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-29.png", title: "Scene 8 Shots 2–3 — Walking Away", note: "Jack leaves the memory behind and looks at the photo of Avery (over-the-shoulder)." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-30.png", title: "Scene 8 Shots 4–5 — Returning to the Beach Bench", note: "Jack sits in the middle of the bench looking at the view; warmer tone shows acceptance." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-31.png", title: "Scene 8 Shots 7–8 — Gripping the Photo", note: "Jack takes Avery's photo out of his pocket (close-up)." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-32.png", title: "Scene 8 Shot 9 & Scene 9 Shot 1 — Letting Go", note: "Jack tosses the photo away; cut to the empty beach." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-33.png", title: "Scene 9 Shots 2–3 — Unread Messages", note: "In the dark, Jack's phone glows on the bench showing '3 unread' messages from Avery." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-34.png", title: "Scene 9 Shots 4–5 — Erased Memories", note: "Waves wash away where Avery drew in the sand; darker mirrored montage scenes show it is over." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-35.png", title: "Scene 9 Shot 6 & Scene 10 Shot 1 — Empty Locations", note: "The empty beach path and empty photo booth." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-36.png", title: "Scene 10 Shots 2–3 — Empty Claw Machine & Marble", note: "The empty claw machine and the marble resting in the grass." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-37.png", title: "Scene 10 Shots 4–5 — Crinkled Photo in the Sand", note: "Switch to purplish tint; feet enter the frame beside the crinkled photo." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-38.png", title: "Scene 10 Shots 6–7 — Avery Finds the Photo", note: "Avery kneels down, picks up the photo, and glances out into the sea." },
+      { file: "Copy of 2.5 Storyboard - A New Kind of Love-39.png", title: "End Slide — Storyboard Complete", note: "Final frame of 'A New Kind of Love' storyboard." }
+    ];
+
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    const musicVideo = document.getElementById("musicVideo");
+    const slideImage = document.getElementById("slideImage");
+    const slideTitle = document.getElementById("slideTitle");
+    const slideNote = document.getElementById("slideNote");
+    const pageCounter = document.getElementById("pageCounter");
+    const progressFill = document.getElementById("progressFill");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const sceneSelect = document.getElementById("sceneSelect");
+    const zonePrev = document.getElementById("zonePrev");
+    const zoneNext = document.getElementById("zoneNext");
+
+    // Populate dropdown menu
+    slides.forEach((slide, idx) => {
+      const option = document.createElement("option");
+      option.value = idx;
+      option.textContent = `${idx + 1}. ${slide.title}`;
+      sceneSelect.appendChild(option);
+    });
+
+    // Video timestamp jump chips
+    document.querySelectorAll(".chip-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const time = Number(btn.dataset.time);
+        const targetSlide = Number(btn.dataset.slide);
+        musicVideo.currentTime = time;
+        musicVideo.play();
+        if (!isNaN(targetSlide) && targetSlide !== currentIndex) {
+          const dir = targetSlide > currentIndex ? "next" : "prev";
+          renderSlide(targetSlide, dir);
+        }
+      });
+    });
+
+    function preloadAdjacent(index) {
+      [index - 1, index + 1].forEach((i) => {
+        if (i >= 0 && i < slides.length) {
+          const img = new Image();
+          img.src = slides[i].file;
+        }
+      });
+    }
+
+    function renderSlide(index, direction = null) {
+      if (index < 0 || index >= slides.length || isAnimating) return;
+
+      const updateDOM = () => {
+        currentIndex = index;
+        const current = slides[currentIndex];
+        slideImage.src = current.file;
+        slideImage.alt = current.title;
+        slideTitle.textContent = current.title;
+        slideNote.textContent = current.note;
+        pageCounter.textContent = `Page ${currentIndex + 1} / ${slides.length}`;
+        sceneSelect.value = currentIndex;
+
+        const pct = ((currentIndex + 1) / slides.length) * 100;
+        progressFill.style.width = `${pct}%`;
+
+        prevBtn.disabled = currentIndex === 0;
+        firstBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === slides.length - 1;
+
+        preloadAdjacent(currentIndex);
+      };
+
+      if (!direction) {
+        updateDOM();
+        return;
+      }
+
+      isAnimating = true;
+      const animClass = direction === "next" ? "flip-out-next" : "flip-out-prev";
+      slideImage.classList.add(animClass);
+
+      setTimeout(() => {
+        updateDOM();
+        slideImage.classList.remove(animClass);
+        setTimeout(() => {
+          isAnimating = false;
+        }, 250);
+      }, 220);
+    }
+
+    function goNext() {
+      if (currentIndex < slides.length - 1) {
+        renderSlide(currentIndex + 1, "next");
+      }
+    }
+
+    function goPrev() {
+      if (currentIndex > 0) {
+        renderSlide(currentIndex - 1, "prev");
+      }
+    }
+
+    nextBtn.addEventListener("click", goNext);
+    prevBtn.addEventListener("click", goPrev);
+    zoneNext.addEventListener("click", goNext);
+    zonePrev.addEventListener("click", goPrev);
+    firstBtn.addEventListener("click", () => renderSlide(0, "prev"));
+
+    sceneSelect.addEventListener("change", (e) => {
+      const target = Number(e.target.value);
+      const dir = target > currentIndex ? "next" : "prev";
+      renderSlide(target, dir);
+    });
+
+    // Keyboard arrow key support (ignores when video or dropdown is focused)
+    document.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "SELECT" || document.activeElement === musicVideo) return;
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        goNext();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+      }
+    });
+
+    renderSlide(0);
+  </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Saved index.html successfully.")
