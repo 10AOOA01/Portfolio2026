@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Comics — Portfolio Collection</title>
+  <style>
+    :root {
+      --bg-color: #141318;
+      --card-bg: #1e1c24;
+      --accent: #d88ca8;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #a78bfa;
+      --text-main: #f4f4f6;
+      --text-muted: #a9a7b5;
+      --border: #2f2c3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background: radial-gradient(circle at top, #231f2e 0%, var(--bg-color) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 3.5rem;
+      gap: 3rem;
+    }
+
+    header {
+      text-align: center;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(216, 140, 168, 0.35);
+      padding: 0.45rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .pill-badge.wip {
+      background: rgba(122, 162, 247, 0.14);
+      color: var(--accent-blue);
+      border-color: rgba(122, 162, 247, 0.35);
+    }
+
+    header h1 {
+      font-size: 2.35rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      margin-top: 0.4rem;
+    }
+
+    /* Quick Jump Nav */
+    .series-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    .series-nav a {
+      text-decoration: none;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      transition: all 0.15s ease;
+    }
+
+    .series-nav a:hover {
+      border-color: var(--accent);
+      background: #282532;
+      transform: translateY(-1px);
+    }
+
+    .section-block {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .section-header {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .mini-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(167, 139, 250, 0.14);
+      color: var(--accent-purple);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+    }
+
+    .section-header span.meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Comic Reader Stage */
+    .stage {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+
+    .comic-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 880px;
+      aspect-ratio: 16 / 10;
+      background: #19181f;
+      border-radius: 12px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .comic-wrapper.light-canvas {
+      background: #ffffff;
+    }
+
+    .comic-wrapper.slate-canvas {
+      background: #4e4b52;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.22s ease;
+    }
+
+    .slide-out-next {
+      transform: translateX(-16px) scale(0.985);
+      opacity: 0.15;
+    }
+
+    .slide-out-prev {
+      transform: translateX(16px) scale(0.985);
+      opacity: 0.15;
+    }
+
+    .click-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .comic-wrapper:hover .click-zone {
+      opacity: 1;
+    }
+
+    .zone-prev {
+      left: 0;
+      justify-content: flex-start;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 45%);
+    }
+
+    .zone-next {
+      right: 0;
+      justify-content: flex-end;
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.2), transparent 45%);
+    }
+
+    .zone-badge {
+      background: rgba(20, 19, 24, 0.82);
+      color: #fff;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-track {
+      width: 100%;
+      max-width: 880px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 999px;
+      margin-top: 0.85rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.25s ease;
+    }
+
+    .info-bar {
+      width: 100%;
+      max-width: 880px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .panel-details {
+      flex: 1 1 540px;
+    }
+
+    .panel-details h3 {
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .panel-details p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      line-height: 1.45;
+    }
+
+    .page-counter {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(216, 140, 168, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(216, 140, 168, 0.25);
+    }
+
+    .controls {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .controls button, .controls select {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.55rem 1.05rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .controls button:hover:not(:disabled), .controls select:hover {
+      background: #282532;
+      border-color: var(--accent);
+    }
+
+    .controls button:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .controls button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .controls button.primary {
+      background: linear-gradient(135deg, #b86b88, #6b88c9);
+      border: none;
+      font-weight: 600;
+    }
+
+    .controls button.primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+
+    /* Thumbnail Strip */
+    .thumb-strip {
+      width: 100%;
+      max-width: 880px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+      gap: 0.65rem;
+      margin-top: 1.1rem;
+    }
+
+    .thumb-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 0.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      overflow: hidden;
+    }
+
+    .thumb-btn:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .thumb-btn.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(216, 140, 168, 0.3);
+    }
+
+    .thumb-btn img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 5px;
+      display: block;
+      background: #ffffff;
+    }
+
+    .thumb-btn span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    footer {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge-row">
+      <span class="pill-badge">Illustration &amp; Storytelling</span>
+      <span class="pill-badge wip">Ongoing Series</span>
+    </div>
+    <h1>Mini Comics</h1>
+    <p>Original comic strips, AU stories, and character vignettes</p>
+
+    <nav class="series-nav" aria-label="Jump to comic series">
+      <a href="#skywing">1. SkyWing (Warrior Cats)</a>
+      <a href="#carps-adventures">2. Carps Adventures</a>
+      <a href="#conduit">3. Conduit: Hopper meets Kristell</a>
+      <a href="#animal-hospital">4. Animal Hospital Anomaly</a>
+    </nav>
+  </header>
+
+  <!-- 1. SKYWING -->
+  <section class="section-block" id="skywing" aria-label="SkyWing Comic">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2>1. SkyWing</h2>
+        <span class="mini-tag">Warrior Cats AU &bull; More Coming Soon</span>
+      </div>
+      <span class="meta" id="skywing-meta">6 Panels</span>
+    </div>
+    <div class="stage" id="skywing-reader"></div>
+  </section>
+
+  <!-- 2. CARPS ADVENTURES -->
+  <section class="section-block" id="carps-adventures" aria-label="Carps Adventures Comic">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2>2. Carps Adventures</h2>
+        <span class="mini-tag">Work in Progress</span>
+      </div>
+      <span class="meta" id="carp-meta">4 Panels</span>
+    </div>
+    <div class="stage" id="carp-reader"></div>
+  </section>
+
+  <!-- 3. CONDUIT -->
+  <section class="section-block" id="conduit" aria-label="Conduit Comic">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2>3. Conduit — "Hopper meets Kristell"</h2>
+        <span class="mini-tag">Short Comic</span>
+      </div>
+      <span class="meta" id="conduit-meta">8 Panels</span>
+    </div>
+    <div class="stage" id="conduit-reader"></div>
+  </section>
+
+  <!-- 4. ANIMAL HOSPITAL ANOMALY -->
+  <section class="section-block" id="animal-hospital" aria-label="Animal Hospital Anomaly Comic">
+    <div class="section-header">
+      <div class="section-title-group">
+        <h2>4. Animal Hospital Anomaly</h2>
+        <span class="mini-tag">Short Vignette</span>
+      </div>
+      <span class="meta" id="aha-meta">3 Panels</span>
+    </div>
+    <div class="stage" id="aha-reader"></div>
+  </section>
+
+  <footer>
+    Tip: Click the right or left side of any comic frame, use the Next/Previous buttons, or click any thumbnail below a comic to jump straight to that panel.
+  </footer>
+
+  <script>
+    const comicSeries = [
+      {
+        containerId: "skywing-reader",
+        metaId: "skywing-meta",
+        canvasClass: "slate-canvas",
+        panels: [
+          { file: "skywing1.png", title: "Panel 1 — \"Oh... Skywing.\"", note: "Skywing rests quietly, glancing up with amber eyes as someone speaks her name." },
+          { file: "skywing2.png", title: "Panel 2 — \"You've grown.\"", note: "Two cats share a warm moment outside the den while Skywing watches from the shadows." },
+          { file: "skywing3.png", title: "Panel 3 — \"Finally finding a mate...\"", note: "As the two cats sit side by side, a quiet reflection lingers: \"Guess I don't need to stick around any longer.\"" },
+          { file: "skywing4.png", title: "Panel 4 — Realization", note: "Skywing's expression shifts in surprise as the words sink in." },
+          { file: "skywing5.png", title: "Panel 5 — Fading Away", note: "Closing her eyes with a soft, bittersweet smile, Skywing begins to fade into wisps of mist." },
+          { file: "skywing6.png", title: "Panel 6 — \"This looks familiar.\"", note: "Two cats sit closely together gazing ahead into the distance." }
+        ]
+      },
+      {
+        containerId: "carp-reader",
+        metaId: "carp-meta",
+        canvasClass: "light-canvas",
+        panels: [
+          { file: "carp1.png", title: "Panel 1 — Up in the Branches", note: "Perched on a tree branch, looking down nervously at a friend below." },
+          { file: "carp2.png", title: "Panel 2 — Heart-to-Heart", note: "A tense conversation unfolds as emotions run high and tears begin to fall." },
+          { file: "carp3.png", title: "Panel 3 — Meeting Carp", note: "A cheerful greeting turns awkward as Carp's scales start feeling off." },
+          { file: "carprash.png", title: "Panel 4 — \"Too much surface\"", note: "Carp's scales have begun to dry and fall out, causing painful rash-like wounds on his arms." }
+        ]
+      },
+      {
+        containerId: "conduit-reader",
+        metaId: "conduit-meta",
+        canvasClass: "light-canvas",
+        panels: [
+          { file: "comicconduit1.png", title: "Panel 1 — \"Why am I back?\"", note: "Hopper suddenly reappears in confusion: \"I thought I was remo—\"" },
+          { file: "comicconduit2.png", title: "Panel 2 — \"...Its just you. Again.\"", note: "Annoyed and sweating, Hopper demands to know why they brought him back." },
+          { file: "comicconduit3.png", title: "Panel 3 — \"Whatever. Just— do what you must.\"", note: "Hopper reluctantly gives in just as someone materializes behind him with a soft *Poof*." },
+          { file: "comicconduit4.png", title: "Panel 4 — \"Oh! Hey!!! You summoned me?\"", note: "Kristell enthusiastically greets them while Hopper glares in disbelief." },
+          { file: "comicconduit5.png", title: "Panel 5 — \"MEET n' GREET?\"", note: "Hopper snaps in frustration: \"You summoned her and me for a MEET n' GREET?\"" },
+          { file: "comicconduit6.png", title: "Panel 6 — Fourth Wall Break", note: "\"And I bet you're gonna title this 'Hopper meets Kristell' or something like that. Yes I know her name.\"" },
+          { file: "comicconduit7.png", title: "Panel 7 — Taking a Break", note: "Kristell checks in while Hopper argues in the background: \"I can tell that you're growing tired of writing this. Uh, take a break.\"" },
+          { file: "comicconduit8.png", title: "Panel 8 — Awkward Silence", note: "Kristell and Hopper stand side by side in quiet, uneasy silence." }
+        ]
+      },
+      {
+        containerId: "aha-reader",
+        metaId: "aha-meta",
+        canvasClass: "light-canvas",
+        panels: [
+          { file: "AHA.png", title: "Panel 1 — \"Soo, what do you think of the new doctor?\"", note: "A nurse leans over the desk to ask her coworker about the newest arrival at the animal hospital." },
+          { file: "AHA2.png", title: "Panel 2 — Mental Math", note: "Thinking it over: tired-looking doctor + hot coffee = dark-eyed anomaly." },
+          { file: "AHA3.png", title: "Panel 3 — \"He's ok\"", note: "Keeping her verdict brief and deadpan." }
+        ]
+      }
+    ];
+
+    function initComicReader(series) {
+      const container = document.getElementById(series.containerId);
+      const metaEl = document.getElementById(series.metaId);
+      const panels = series.panels;
+      let currentIndex = 0;
+      let isAnimating = false;
+
+      if (metaEl) {
+        metaEl.textContent = `${panels.length} Panel${panels.length === 1 ? "" : "s"}`;
+      }
+
+      container.innerHTML = `
+        <div class="comic-wrapper ${series.canvasClass || ""}" title="Click left side for Previous panel, right side for Next panel">
+          <div class="click-zone zone-prev">
+            <span class="zone-badge">&larr; Previous</span>
+          </div>
+          <img class="slide-image" src="${panels[0].file}" alt="${panels[0].title}" />
+          <div class="click-zone zone-next">
+            <span class="zone-badge">Next &rarr;</span>
+          </div>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill"></div>
+        </div>
+
+        <div class="info-bar">
+          <div class="panel-details">
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="page-counter"></div>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="first-btn" title="Jump to first panel">&#x23EE; Start</button>
+          <button type="button" class="prev-btn">&larr; Previous</button>
+          <select aria-label="Jump to panel"></select>
+          <button type="button" class="next-btn primary">Next Panel &rarr;</button>
+        </div>
+
+        <div class="thumb-strip"></div>
+      `;
+
+      const slideImage = container.querySelector(".slide-image");
+      const slideTitle = container.querySelector(".panel-details h3");
+      const slideNote = container.querySelector(".panel-details p");
+      const pageCounter = container.querySelector(".page-counter");
+      const progressFill = container.querySelector(".progress-fill");
+      const prevBtn = container.querySelector(".prev-btn");
+      const nextBtn = container.querySelector(".next-btn");
+      const firstBtn = container.querySelector(".first-btn");
+      const panelSelect = container.querySelector("select");
+      const thumbStrip = container.querySelector(".thumb-strip");
+      const zonePrev = container.querySelector(".zone-prev");
+      const zoneNext = container.querySelector(".zone-next");
+
+      panels.forEach((panel, idx) => {
+        const option = document.createElement("option");
+        option.value = idx;
+        option.textContent = `${idx + 1}. ${panel.title}`;
+        panelSelect.appendChild(option);
+
+        const thumbBtn = document.createElement("button");
+        thumbBtn.className = "thumb-btn";
+        thumbBtn.type = "button";
+        thumbBtn.innerHTML = `<img src="${panel.file}" alt="Panel ${idx + 1}" loading="lazy" /><span>Panel ${idx + 1}</span>`;
+        thumbBtn.addEventListener("click", () => {
+          if (idx !== currentIndex) {
+            const dir = idx > currentIndex ? "next" : "prev";
+            renderPanel(idx, dir);
+          }
+        });
+        thumbStrip.appendChild(thumbBtn);
+      });
+
+      function preloadAdjacent(index) {
+        [index - 1, index + 1].forEach((i) => {
+          if (i >= 0 && i < panels.length) {
+            const img = new Image();
+            img.src = panels[i].file;
+          }
+        });
+      }
+
+      function renderPanel(index, direction = null) {
+        if (index < 0 || index >= panels.length || isAnimating) return;
+
+        const updateDOM = () => {
+          currentIndex = index;
+          const current = panels[currentIndex];
+          slideImage.src = current.file;
+          slideImage.alt = current.title;
+          slideTitle.textContent = current.title;
+          slideNote.textContent = current.note;
+          pageCounter.textContent = `Panel ${currentIndex + 1} / ${panels.length}`;
+          panelSelect.value = currentIndex;
+
+          const pct = ((currentIndex + 1) / panels.length) * 100;
+          progressFill.style.width = `${pct}%`;
+
+          prevBtn.disabled = currentIndex === 0;
+          firstBtn.disabled = currentIndex === 0;
+          nextBtn.disabled = currentIndex === panels.length - 1;
+
+          thumbStrip.querySelectorAll(".thumb-btn").forEach((btn, i) => {
+            btn.classList.toggle("active", i === currentIndex);
+          });
+
+          preloadAdjacent(currentIndex);
+        };
+
+        if (!direction) {
+          updateDOM();
+          return;
+        }
+
+        isAnimating = true;
+        const animClass = direction === "next" ? "slide-out-next" : "slide-out-prev";
+        slideImage.classList.add(animClass);
+
+        setTimeout(() => {
+          updateDOM();
+          slideImage.classList.remove(animClass);
+          setTimeout(() => {
+            isAnimating = false;
+          }, 200);
+        }, 180);
+      }
+
+      function goNext() {
+        if (currentIndex < panels.length - 1) {
+          renderPanel(currentIndex + 1, "next");
+        }
+      }
+
+      function goPrev() {
+        if (currentIndex > 0) {
+          renderPanel(currentIndex - 1, "prev");
+        }
+      }
+
+      nextBtn.addEventListener("click", goNext);
+      prevBtn.addEventListener("click", goPrev);
+      zoneNext.addEventListener("click", goNext);
+      zonePrev.addEventListener("click", goPrev);
+      firstBtn.addEventListener("click", () => renderPanel(0, "prev"));
+
+      panelSelect.addEventListener("change", (e) => {
+        const target = Number(e.target.value);
+        const dir = target > currentIndex ? "next" : "prev";
+        renderPanel(target, dir);
+      });
+
+      renderPanel(0);
+    }
+
+    comicSeries.forEach(initComicReader);
+  </script>
+</body>
+</html>
