@@ -4,15 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A New Kind of Love — 2.5 Media Studies Portfolio</title>
-  <!-- keep your existing <style> block here, including .pill-badge above -->
-</head>
-<body>
-
-  <header>
-    <div class="pill-badge">2.5 Media Studies &bull; Film &amp; Storyboard</div>
-    <h1>A New Kind of Love</h1>
-    <p>Music Video &amp; Storyboard Flipbook by AJ and Amelia</p>
-  </header>
   <style>
     :root {
       --bg-color: #141318;
@@ -38,7 +29,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem 3rem;
+      padding: 2.5rem 1rem 3rem;
       gap: 2.5rem;
     }
 
@@ -48,8 +39,22 @@
       width: 100%;
     }
 
+    .pill-badge {
+      display: inline-block;
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(216, 140, 168, 0.35);
+      padding: 0.45rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
     header h1 {
-      font-size: 2rem;
+      font-size: 2.25rem;
       font-weight: 700;
       letter-spacing: 0.02em;
       background: linear-gradient(90deg, var(--accent), var(--accent-blue));
@@ -60,7 +65,7 @@
     header p {
       color: var(--text-muted);
       font-size: 0.95rem;
-      margin-top: 0.35rem;
+      margin-top: 0.4rem;
     }
 
     .section-block {
@@ -357,8 +362,9 @@
 <body>
 
   <header>
+    <div class="pill-badge">2.5 Media Studies &bull; Film &amp; Storyboard</div>
     <h1>A New Kind of Love</h1>
-    <p>2.5 Media Studies &bull; Music Video &amp; Storyboard Flipbook by AJ and Amelia</p>
+    <p>Music Video &amp; Storyboard Flipbook by AJ and Amelia</p>
   </header>
 
   <!-- TOP SECTION: MUSIC VIDEO -->
@@ -606,9 +612,3 @@
   </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Saved index.html successfully.")
