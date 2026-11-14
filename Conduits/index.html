@@ -161,6 +161,12 @@
       gap: 18px;
     }
 
+    .art-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
     @media (max-width: 900px) {
       .section-header {
         flex-direction: column;
@@ -232,8 +238,9 @@
       object-fit: cover;
     }
 
-    .skins-grid .art-card img {
-      height: 270px;
+    .skins-grid .art-card img,
+    .art-gallery-grid .art-card img {
+      height: 260px;
       padding: 12px;
       background-color: #ffffff;
     }
@@ -396,11 +403,11 @@
       <div class="section-header">
         <div>
           <span class="section-eyebrow">Roster 01</span>
-          <h2>Core Fighter Models</h2>
-          <p class="section-desc">Primary elemental archetypes modeled and rigged in Roblox Studio: Wings, Shroom, and Chains.</p>
+          <h2>3D Fighter Models</h2>
+          <p class="section-desc">Custom character rigs modeled and posed in Roblox Studio.</p>
         </div>
         <div class="tag-group">
-          <span class="meta-tag">3 Base Fighters</span>
+          <span class="meta-tag">5 Models</span>
           <span class="meta-tag">Roblox Studio 3D</span>
         </div>
       </div>
@@ -424,6 +431,20 @@
           <img src="conduityellow.png" alt="Chains 3D Character Model">
           <div class="item-caption">
             <span>Chains — 3D Model Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitpurple.png', 'Purple Fighter — 3D Character Render')">
+          <img src="conduitpurple.png" alt="Purple Fighter 3D Model">
+          <div class="item-caption">
+            <span>Purple Conduit — 3D Model Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card gold-accent" onclick="openLightbox('conduitpink.png', 'Pink Fighter — 3D Character Render')">
+          <img src="conduitpink.png" alt="Pink Fighter 3D Model">
+          <div class="item-caption">
+            <span>Pink Conduit — 3D Model Render</span>
             <span class="zoom-hint">Enlarge</span>
           </div>
         </div>
@@ -469,25 +490,32 @@
       </div>
     </section>
 
-    <!-- Section 3: 2D Character & Skin Concepts -->
+    <!-- Section 3: 2D Alternate Skin Concepts -->
     <section class="section-card">
       <div class="section-header">
         <div>
           <span class="section-eyebrow">Concept Art 03</span>
-          <h2>Alternate Skin &amp; Character Concepts</h2>
-          <p class="section-desc">2D character design sheets and cosmetic skin ideas drawn for the Conduits roster.</p>
+          <h2>Alternate Skin Concepts</h2>
+          <p class="section-desc">2D cosmetic skin design sheets drawn for the Conduits roster.</p>
         </div>
         <div class="tag-group">
-          <span class="meta-tag">4 Concept Sheets</span>
-          <span class="meta-tag">2D Illustration</span>
+          <span class="meta-tag">6 Skin Sheets</span>
+          <span class="meta-tag">2D Concept Art</span>
         </div>
       </div>
 
       <div class="skins-grid">
-        <div class="art-card" onclick="openLightbox('conduitskins1.png', 'Hopper Skin Ref — \"Certain Traveler\" & Crystal Variant')">
+        <div class="art-card" onclick="openLightbox('conduitskins1.png', 'Hopper Skin Ref — &ldquo;Certain Traveler&rdquo; &amp; Crystal Variant')">
           <img src="conduitskins1.png" alt="Hopper Skin Ref Certain Traveler">
           <div class="item-caption">
             <span>Hopper Skin Ref — &ldquo;Certain Traveler&rdquo;</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitskinsputafter1.png', 'Hopper Variant — Alternate Skin Sheet')">
+          <img src="conduitskinsputafter1.png" alt="Hopper Variant Alternate Skin Sheet">
+          <div class="item-caption">
+            <span>Hopper Variant — Alternate Skin Sheet</span>
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
@@ -505,10 +533,91 @@
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
-        <div class="art-card" onclick="openLightbox('conduitskins4.png', 'Spectral Chains & Seraph Wings Skin Concepts')">
+        <div class="art-card" onclick="openLightbox('conduitskins4.png', 'Spectral Chains &amp; Seraph Wings Skin Concepts')">
           <img src="conduitskins4.png" alt="Spectral Chains and Seraph Wings Skin Concepts">
           <div class="item-caption">
             <span>Spectral Chains &amp; Seraph Wings Concepts</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitskins5.png', 'Alternate Skin Concept Sheet 05')">
+          <img src="conduitskins5.png" alt="Alternate Skin Concept Sheet 05">
+          <div class="item-caption">
+            <span>Alternate Skin Concept 05</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Character Illustrations & Weapon Concepts -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow gold">Illustrations 04</span>
+          <h2>Character Art &amp; Weapon Concepts</h2>
+          <p class="section-desc">2D character illustrations, roster art, and early weapon explorations.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">8 Artworks</span>
+          <span class="meta-tag">Character Art</span>
+        </div>
+      </div>
+
+      <div class="art-gallery-grid">
+        <div class="art-card" onclick="openLightbox('conduitart.png', 'Conduits — Key Character Illustration')">
+          <img src="conduitart.png" alt="Conduits Key Character Illustration">
+          <div class="item-caption">
+            <span>Conduits — Key Illustration</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart1.png', 'Conduits — Character Art 01')">
+          <img src="conduitart1.png" alt="Conduits Character Art 01">
+          <div class="item-caption">
+            <span>Character Art 01</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart2.png', 'Conduits — Character Art 02')">
+          <img src="conduitart2.png" alt="Conduits Character Art 02">
+          <div class="item-caption">
+            <span>Character Art 02</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart3.png', 'Conduits — Character Art 03')">
+          <img src="conduitart3.png" alt="Conduits Character Art 03">
+          <div class="item-caption">
+            <span>Character Art 03</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart4.png', 'Conduits — Character Art 04')">
+          <img src="conduitart4.png" alt="Conduits Character Art 04">
+          <div class="item-caption">
+            <span>Character Art 04</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart5.png', 'Conduits — Character Art 05')">
+          <img src="conduitart5.png" alt="Conduits Character Art 05">
+          <div class="item-caption">
+            <span>Character Art 05</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitart6.png', 'Conduits — Character Art 06')">
+          <img src="conduitart6.png" alt="Conduits Character Art 06">
+          <div class="item-caption">
+            <span>Character Art 06</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card gold-accent" onclick="openLightbox('conduitearlykristellpurpleweaponsconcept.png', 'Early Kristell — Purple Weapons Concept')">
+          <img src="conduitearlykristellpurpleweaponsconcept.png" alt="Early Kristell Purple Weapons Concept">
+          <div class="item-caption">
+            <span>Early Kristell — Weapons Concept</span>
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
@@ -555,7 +664,7 @@
 
     function openLightbox(src, title) {
       lightboxImg.src = src;
-      lightboxCaption.textContent = title || 'Full Resolution Preview';
+      lightboxCaption.innerHTML = title || 'Full Resolution Preview';
       resetZoom();
       lightbox.classList.add('active');
     }
