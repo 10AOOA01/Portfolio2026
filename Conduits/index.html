@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conduits — Character Design &amp; Roblox Fighting Game Concept</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #090b10;
+      background-image:
+        radial-gradient(circle at 25% 0%, rgba(56, 189, 248, 0.14) 0%, rgba(9, 11, 16, 0) 50%),
+        radial-gradient(circle at 75% 0%, rgba(250, 204, 21, 0.11) 0%, rgba(9, 11, 16, 0) 50%);
+      background-repeat: no-repeat;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 64px 24px 96px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Centered Hero Header */
+    header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background-color: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    header h1 span {
+      background: linear-gradient(90deg, #38bdf8, #facc15);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* Outer Section Panel Cards */
+    .section-card {
+      background-color: #10141d;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .section-eyebrow.gold {
+      color: #facc15;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .section-desc {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .meta-tag {
+      background-color: #090b10;
+      border: 1px solid #273549;
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* Grids */
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .roster-grid .featured-wide {
+      grid-column: span 2;
+    }
+
+    .renders-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .renders-grid .featured-wide {
+      grid-column: span 2;
+    }
+
+    .skins-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .section-header {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 1.95rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .roster-grid,
+      .renders-grid,
+      .skins-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .roster-grid .featured-wide,
+      .renders-grid .featured-wide {
+        grid-column: span 1;
+      }
+    }
+
+    /* Inner Framed Cards */
+    .art-card {
+      background-color: #090b10;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .art-card:hover {
+      transform: translateY(-3px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 22px rgba(56, 189, 248, 0.2);
+    }
+
+    .art-card.gold-accent:hover {
+      border-color: #facc15;
+      box-shadow: 0 8px 22px rgba(250, 204, 21, 0.2);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 270px;
+      object-fit: contain;
+      background-color: #05070a;
+      display: block;
+    }
+
+    .roster-grid .featured-wide img {
+      height: 310px;
+      object-fit: cover;
+    }
+
+    .renders-grid .art-card img {
+      height: 230px;
+      object-fit: cover;
+    }
+
+    .renders-grid .featured-wide img {
+      height: 310px;
+      object-fit: cover;
+    }
+
+    .skins-grid .art-card img {
+      height: 270px;
+      padding: 12px;
+      background-color: #ffffff;
+    }
+
+    .item-caption {
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      background-color: #0d1119;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zoom-hint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #38bdf8;
+      white-space: nowrap;
+    }
+
+    .gold-accent .zoom-hint {
+      color: #facc15;
+    }
+
+    /* Interactive Zoom & Pan Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 10, 0.94);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 84vh;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.9);
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+      pointer-events: none;
+    }
+
+    .lightbox-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #10141d;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85);
+      z-index: 1002;
+    }
+
+    .lightbox-btn {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .lightbox-btn:hover {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+
+    .zoom-level {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #38bdf8;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .lightbox-caption {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      background-color: rgba(16, 20, 29, 0.92);
+      border: 1px solid #334155;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      z-index: 1002;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+    }
+
+    .lightbox-close:hover {
+      background-color: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="pill-badge">Roblox Studio Passion Project</div>
+      <h1><span>Conduits</span></h1>
+      <p>Originally envisioned as a 2.5D/3D traditional fighting game on Roblox Studio, Conduits evolved into a character-focused creative project exploring elemental fighter silhouettes, custom 3D rigs, combat VFX renders, and alternate skin concepts.</p>
+    </header>
+
+    <!-- Section 1: Core Fighter Roster (3D Models) -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Roster 01</span>
+          <h2>Core Fighter Models</h2>
+          <p class="section-desc">Primary elemental archetypes modeled and rigged in Roblox Studio: Wings, Shroom, and Chains.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">3 Base Fighters</span>
+          <span class="meta-tag">Roblox Studio 3D</span>
+        </div>
+      </div>
+
+      <div class="roster-grid">
+        <div class="art-card featured-wide" onclick="openLightbox('conduitstudio.png', 'Conduits Base Roster — Wings, Shroom & Chains (Roblox Studio)')">
+          <img src="conduitstudio.png" alt="Conduits Base Roster Wings Shroom and Chains">
+          <div class="item-caption">
+            <span>Base Roster Lineup — Wings, Shroom &amp; Chains</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitblue.png', 'Wings — 3D Character Render')">
+          <img src="conduitblue.png" alt="Wings 3D Character Model">
+          <div class="item-caption">
+            <span>Wings — 3D Model Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card gold-accent" onclick="openLightbox('conduityellow.png', 'Chains — 3D Character Render')">
+          <img src="conduityellow.png" alt="Chains 3D Character Model">
+          <div class="item-caption">
+            <span>Chains — 3D Model Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: In-Engine Action & VFX Renders -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow gold">Showcase 02</span>
+          <h2>Combat VFX &amp; Action Poses</h2>
+          <p class="section-desc">Custom lighting, aerial motion trails, feather projectiles, and chain-slash effects captured in-engine.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">3 Action Scenes</span>
+          <span class="meta-tag">VFX &amp; Lighting</span>
+        </div>
+      </div>
+
+      <div class="renders-grid">
+        <div class="art-card gold-accent featured-wide" onclick="openLightbox('chainsrender.png', 'Chains — Crimson Arena & Slash VFX Render')">
+          <img src="chainsrender.png" alt="Chains Crimson Arena VFX Render">
+          <div class="item-caption">
+            <span>Chains — Crimson Arena &amp; Slash VFX Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('wingsfeather.png', 'Wings — Feather Barrage Attack Render')">
+          <img src="wingsfeather.png" alt="Wings Feather Barrage VFX">
+          <div class="item-caption">
+            <span>Wings — Feather Barrage Attack</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('wingsold.png', 'Wings — Early Aerial Dash Render')">
+          <img src="wingsold.png" alt="Wings Early Aerial Dash Render">
+          <div class="item-caption">
+            <span>Wings — Early Aerial Dash Render</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: 2D Character & Skin Concepts -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Concept Art 03</span>
+          <h2>Alternate Skin &amp; Character Concepts</h2>
+          <p class="section-desc">2D character design sheets and cosmetic skin ideas drawn for the Conduits roster.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">4 Concept Sheets</span>
+          <span class="meta-tag">2D Illustration</span>
+        </div>
+      </div>
+
+      <div class="skins-grid">
+        <div class="art-card" onclick="openLightbox('conduitskins1.png', 'Hopper Skin Ref — \"Certain Traveler\" & Crystal Variant')">
+          <img src="conduitskins1.png" alt="Hopper Skin Ref Certain Traveler">
+          <div class="item-caption">
+            <span>Hopper Skin Ref — &ldquo;Certain Traveler&rdquo;</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card gold-accent" onclick="openLightbox('conduitskins2.png', 'Carrots — Killer Bunny Skin Concept')">
+          <img src="conduitskins2.png" alt="Killer Bunny Carrots Skin Concept">
+          <div class="item-caption">
+            <span>Carrots — Killer Bunny Concept</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card gold-accent" onclick="openLightbox('conduitskins3.png', 'Spade Skin — Magician Concept')">
+          <img src="conduitskins3.png" alt="Spade Skin Magician Concept">
+          <div class="item-caption">
+            <span>Spade Skin — Magician Concept</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('conduitskins4.png', 'Spectral Chains & Seraph Wings Skin Concepts')">
+          <img src="conduitskins4.png" alt="Spectral Chains and Seraph Wings Skin Concepts">
+          <div class="item-caption">
+            <span>Spectral Chains &amp; Seraph Wings Concepts</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Zoom & Pan Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-caption" id="lightbox-caption">Preview</div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+
+    <div class="lightbox-stage" id="lightbox-stage">
+      <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+
+    <div class="lightbox-controls">
+      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+      <span class="zoom-level" id="zoom-level">100%</span>
+      <button class="lightbox-btn" onclick="adjustZoom(0.5)">+</button>
+      <button class="lightbox-btn" onclick="resetZoom()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const zoomLevelText = document.getElementById('zoom-level');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    function updateTransform() {
+      lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function openLightbox(src, title) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = title || 'Full Resolution Preview';
+      resetZoom();
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      resetZoom();
+    }
+
+    function adjustZoom(delta) {
+      scale = Math.min(Math.max(1, scale + delta), 6);
+      if (scale === 1) {
+        translateX = 0;
+        translateY = 0;
+      }
+      updateTransform();
+    }
+
+    function resetZoom() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    lightboxStage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.35 : -0.35;
+      adjustZoom(delta);
+    }, { passive: false });
+
+    lightboxStage.addEventListener('dblclick', () => {
+      if (scale > 1) {
+        resetZoom();
+      } else {
+        scale = 2.5;
+        updateTransform();
+      }
+    });
+
+    lightboxStage.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      moved = false;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      lightboxStage.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      moved = true;
+      if (scale > 1) {
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      }
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      lightboxStage.classList.remove('dragging');
+      if (!moved && scale === 1 && e.target === lightboxStage) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
