@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Year 13 Media Studies — Short Film &amp; Script Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #141318;
+      --card-bg: #1e1c24;
+      --accent: #d88ca8;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #a78bfa;
+      --text-main: #f4f4f6;
+      --text-muted: #a9a7b5;
+      --border: #2f2c3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background: radial-gradient(circle at top, #231f2e 0%, var(--bg-color) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 3rem;
+      gap: 2.5rem;
+    }
+
+    header {
+      text-align: center;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(216, 140, 168, 0.35);
+      padding: 0.45rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.4rem;
+    }
+
+    .section-block {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .section-header span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Video Section */
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+
+    .timestamp-bar {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      margin-top: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timestamp-bar .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-right: 0.35rem;
+    }
+
+    .chip-btn {
+      background: #26232e;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--accent);
+      background: #302c3a;
+    }
+
+    /* Script Flipbook Stage (Portrait document optimized) */
+    .stage {
+      width: 100%;
+      perspective: 1800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+    }
+
+    .book-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 8.5 / 11;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 12px 0 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .book-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 24px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.16), rgba(0,0,0,0.03) 60%, transparent);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #ffffff;
+      transform-origin: left center;
+      transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+    }
+
+    .flip-out-next {
+      transform: rotateY(-28deg) scale(0.97);
+      opacity: 0.15;
+    }
+
+    .flip-out-prev {
+      transform: rotateY(22deg) scale(0.97);
+      opacity: 0.15;
+    }
+
+    .click-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .book-wrapper:hover .click-zone {
+      opacity: 1;
+    }
+
+    .zone-prev {
+      left: 0;
+      justify-content: flex-start;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 45%);
+    }
+
+    .zone-next {
+      right: 0;
+      justify-content: flex-end;
+      background: linear-gradient(270deg, rgba(0, 0, 0, 0.12), transparent 45%);
+    }
+
+    .zone-badge {
+      background: rgba(20, 19, 24, 0.78);
+      color: #fff;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .info-bar {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .shot-details h3 {
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .shot-details p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .page-counter {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(216, 140, 168, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(216, 140, 168, 0.25);
+    }
+
+    /* Contribution Clarification Callout */
+    .contribution-note {
+      width: 100%;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.32);
+      border-radius: 10px;
+      padding: 0.85rem 1.2rem;
+      margin-top: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .color-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: var(--accent-purple);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(167, 139, 250, 0.5);
+    }
+
+    .contribution-note strong {
+      color: var(--accent-purple);
+    }
+
+    .controls {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .controls button, .controls select {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .controls button:hover:not(:disabled), .controls select:hover {
+      background: #282532;
+      border-color: var(--accent);
+    }
+
+    .controls button:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .controls button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .controls button.primary {
+      background: linear-gradient(135deg, #b86b88, #6b88c9);
+      border: none;
+      font-weight: 600;
+    }
+
+    .controls button.primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+
+    .progress-track {
+      width: 100%;
+      max-width: 720px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 999px;
+      margin-top: 0.85rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      transition: width 0.25s ease;
+    }
+
+    footer {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    kbd {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="pill-badge">Year 13 Media Studies &bull; Short Film &amp; Script</div>
+    <h1>James' Forest — Thriller Short Film</h1>
+    <p>Final Film &amp; Collaborative Screenplay by Blaire, Hazel, Amber &amp; Rose</p>
+  </header>
+
+  <!-- TOP SECTION: SHORT FILM VIDEO (YOUTUBE EMBED) -->
+  <section class="section-block" aria-label="Short Film Video">
+    <div class="section-header">
+      <h2>1. Final Short Film</h2>
+      <span>Year 13 Production (8+ mins)</span>
+    </div>
+
+    <div class="video-wrapper">
+      <iframe
+        id="shortFilmVideo"
+        src="https://www.youtube.com/embed/3gkNpvCcfLk"
+        title="James' Forest — Year 13 Short Film"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="timestamp-bar">
+      <span class="label">Jump to scene:</span>
+      <button class="chip-btn" data-time="0" data-slide="0">Scene 1: Group Chat &amp; Campsite</button>
+      <button class="chip-btn" data-time="90" data-slide="2">Scene 2: The Abandoned Tent</button>
+      <button class="chip-btn" data-time="180" data-slide="4">Scene 3: Amber Left Alone</button>
+      <button class="chip-btn" data-time="240" data-slide="5">Scene 4: Ransacked Tent &amp; Blood</button>
+      <button class="chip-btn" data-time="330" data-slide="7">Scene 5: Rose Alone at Campsite</button>
+      <button class="chip-btn" data-time="400" data-slide="9">Scene 6: Blaire's Betrayal &amp; Twist</button>
+    </div>
+  </section>
+
+  <!-- BOTTOM SECTION: INTERACTIVE SCRIPT FLIPBOOK -->
+  <section class="section-block" aria-label="Script Flipbook">
+    <div class="section-header">
+      <h2>2. Production Script</h2>
+      <span>12 Pages &bull; Collaborative Screenplay</span>
+    </div>
+
+    <main class="stage">
+      <div class="book-wrapper" id="bookWrapper" title="Click left side for Previous, right side for Next">
+        <div class="click-zone zone-prev" id="zonePrev">
+          <span class="zone-badge">&larr; Previous</span>
+        </div>
+        <img
+          id="slideImage"
+          class="slide-image"
+          src="Copy of Media Script!!!! (1)-01.png"
+          alt="Script Page 1"
+        />
+        <div class="click-zone zone-next" id="zoneNext">
+          <span class="zone-badge">Next &rarr;</span>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div class="info-bar">
+        <div class="shot-details">
+          <h3 id="slideTitle">Page 1 — Int. Blaire's Bedroom / Ext. Campsite</h3>
+          <p id="slideNote">Blaire texts the group chat to plan a camping trip in James' Forest; the group sets up camp.</p>
+        </div>
+        <div class="page-counter" id="pageCounter">Page 1 / 12</div>
+      </div>
+
+      <div class="contribution-note">
+        <span class="color-swatch" aria-hidden="true"></span>
+        <p><strong>Script Contribution Key:</strong> All sections highlighted in <strong>purple text</strong> throughout the script indicate my personal writing contributions.</p>
+      </div>
+
+      <div class="controls">
+        <button id="firstBtn" title="Jump to start">&#x23EE; Start</button>
+        <button id="prevBtn">&larr; Previous</button>
+        <select id="sceneSelect" aria-label="Jump to script page"></select>
+        <button id="nextBtn" class="primary">Next Page &rarr;</button>
+      </div>
+    </main>
+  </section>
+
+  <footer>
+    Tip: Click the right/left side of the script page, use the buttons, or press <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> arrow keys to flip pages.
+  </footer>
+
+  <script>
+    const slides = [
+      { file: "Copy of Media Script!!!! (1)-01.png", title: "Page 1 — Int. Blaire's Bedroom / Ext. Campsite", note: "Blaire texts the group chat to plan a camping trip in James' Forest; the group sets up camp." },
+      { file: "Copy of Media Script!!!! (1)-02.png", title: "Page 2 — Ext. Campsite (Night)", note: "Blaire introduces the missing hikers mystery on camera and uses Randonautica to generate coordinates." },
+      { file: "Copy of Media Script!!!! (1)-03.png", title: "Page 3 — Ext. Abandoned Tent (Night)", note: "The group follows the coordinates through the woods to an old abandoned tent; Hazel dares Amber to go inside." },
+      { file: "Copy of Media Script!!!! (1)-04.png", title: "Page 4 — Ext. Abandoned Tent (Night)", note: "Amber reluctantly enters the tent while Hazel, Blaire, and Rose sneak away laughing." },
+      { file: "Copy of Media Script!!!! (1)-05.png", title: "Page 5 — Int. & Ext. Abandoned Tent (Night)", note: "The group splits up to search for clues; Amber hears footsteps outside before Rose finds the tent ransacked." },
+      { file: "Copy of Media Script!!!! (1)-06.png", title: "Page 6 — Ext. Abandoned Tent (Night)", note: "Rose and Blaire discover blood inside the tent and realize Amber is missing; Hazel returns with old hikers' gear." },
+      { file: "Copy of Media Script!!!! (1)-07.png", title: "Page 7 — Ext. Abandoned Tent (Night)", note: "Hazel spots Amber's phone in the tent; they watch the footage and argue over whether Amber is still alive." },
+      { file: "Copy of Media Script!!!! (1)-08.png", title: "Page 8 — Ext. Campsite (Night)", note: "Blaire and Hazel head back into the woods to search while Rose stays behind alone at the campsite." },
+      { file: "Copy of Media Script!!!! (1)-09.png", title: "Page 9 — Ext. Campsite (Night)", note: "Blaire returns to the campsite alone without Hazel, suppressing a smile in a tense long shot." },
+      { file: "Copy of Media Script!!!! (1)-10.png", title: "Page 10 — Ext. Campsite (Night)", note: "Blaire reveals Hazel's turned-off flashlight and bloodstained sleeves before attacking Rose with a pocket knife." },
+      { file: "Copy of Media Script!!!! (1)-11.png", title: "Page 11 — Ext. Campsite (POV Shot)", note: "Captured from Rose's camera POV, Amber suddenly knocks Blaire out with an iron pot and rescues Rose." },
+      { file: "Copy of Media Script!!!! (1)-12.png", title: "Page 12 — Ext. Campsite (Ending)", note: "Amber calls the authorities while Rose unlocks Blaire's phone and uncovers messages about an organ trafficking operation." }
+    ];
+
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    const shortFilmVideo = document.getElementById("shortFilmVideo");
+    const slideImage = document.getElementById("slideImage");
+    const slideTitle = document.getElementById("slideTitle");
+    const slideNote = document.getElementById("slideNote");
+    const pageCounter = document.getElementById("pageCounter");
+    const progressFill = document.getElementById("progressFill");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const firstBtn = document.getElementById("firstBtn");
+    const sceneSelect = document.getElementById("sceneSelect");
+    const zonePrev = document.getElementById("zonePrev");
+    const zoneNext = document.getElementById("zoneNext");
+
+    // Populate dropdown menu
+    slides.forEach((slide, idx) => {
+      const option = document.createElement("option");
+      option.value = idx;
+      option.textContent = `${idx + 1}. ${slide.title}`;
+      sceneSelect.appendChild(option);
+    });
+
+    // Scene jump chips (jumps both YouTube timestamp and script page)
+    document.querySelectorAll(".chip-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const time = Number(btn.dataset.time);
+        const targetSlide = Number(btn.dataset.slide);
+
+        if (!isNaN(time)) {
+          shortFilmVideo.src = `https://www.youtube.com/embed/3gkNpvCcfLk?start=${time}&autoplay=1`;
+        }
+
+        if (!isNaN(targetSlide) && targetSlide !== currentIndex) {
+          const dir = targetSlide > currentIndex ? "next" : "prev";
+          renderSlide(targetSlide, dir);
+        }
+      });
+    });
+
+    function preloadAdjacent(index) {
+      [index - 1, index + 1].forEach((i) => {
+        if (i >= 0 && i < slides.length) {
+          const img = new Image();
+          img.src = slides[i].file;
+        }
+      });
+    }
+
+    function renderSlide(index, direction = null) {
+      if (index < 0 || index >= slides.length || isAnimating) return;
+
+      const updateDOM = () => {
+        currentIndex = index;
+        const current = slides[currentIndex];
+        slideImage.src = current.file;
+        slideImage.alt = current.title;
+        slideTitle.textContent = current.title;
+        slideNote.textContent = current.note;
+        pageCounter.textContent = `Page ${currentIndex + 1} / ${slides.length}`;
+        sceneSelect.value = currentIndex;
+
+        const pct = ((currentIndex + 1) / slides.length) * 100;
+        progressFill.style.width = `${pct}%`;
+
+        prevBtn.disabled = currentIndex === 0;
+        firstBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === slides.length - 1;
+
+        preloadAdjacent(currentIndex);
+      };
+
+      if (!direction) {
+        updateDOM();
+        return;
+      }
+
+      isAnimating = true;
+      const animClass = direction === "next" ? "flip-out-next" : "flip-out-prev";
+      slideImage.classList.add(animClass);
+
+      setTimeout(() => {
+        updateDOM();
+        slideImage.classList.remove(animClass);
+        setTimeout(() => {
+          isAnimating = false;
+        }, 250);
+      }, 220);
+    }
+
+    function goNext() {
+      if (currentIndex < slides.length - 1) {
+        renderSlide(currentIndex + 1, "next");
+      }
+    }
+
+    function goPrev() {
+      if (currentIndex > 0) {
+        renderSlide(currentIndex - 1, "prev");
+      }
+    }
+
+    nextBtn.addEventListener("click", goNext);
+    prevBtn.addEventListener("click", goPrev);
+    zoneNext.addEventListener("click", goNext);
+    zonePrev.addEventListener("click", goPrev);
+    firstBtn.addEventListener("click", () => renderSlide(0, "prev"));
+
+    sceneSelect.addEventListener("change", (e) => {
+      const target = Number(e.target.value);
+      const dir = target > currentIndex ? "next" : "prev";
+      renderSlide(target, dir);
+    });
+
+    // Keyboard arrow key support
+    document.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "SELECT" || document.activeElement === shortFilmVideo) return;
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        goNext();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+      }
+    });
+
+    renderSlide(0);
+  </script>
+</body>
+</html>
