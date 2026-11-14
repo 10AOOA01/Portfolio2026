@@ -58,8 +58,15 @@
 
     .sticker-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .sticker-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
     }
 
     .art-card {
@@ -158,14 +165,14 @@
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1teaganvalentine.png" alt="Rosy Bouquet Teagan Skin"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlerodgerskin.png" alt="Elf Helper Toodles and Toy Maker Rodger"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1goobscrapschristmas.png" alt="Christmas Goob and Scraps"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattagourdy.png" alt="Yatta and Gourdy"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitzchristmasskin.png" alt="Yatta and Gourdy"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1shellyastrogp.png" alt="Starry Shelly and Astro"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1astroandshelly.png" alt="Winter Astro and Shelly"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlehalloween.png" alt="Halloween Toodles"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattasona.png" alt="Yatta Sona"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1eastertishaskin.png" alt="Yatta Sona"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1gingerskin.png" alt="Ginger Skin Concept"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitzchristmasskin.png" alt="Snowball Thrower Blitz Skins"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1eastertishaskin.png" alt="Easter Bunny Tisha Skin"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattagourdy.png" alt="Snowball Thrower Blitz Skins"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattasona.png" alt="Easter Bunny Tisha Skin"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattaten.png" alt="Yatta and Waxwell"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1oppawax.png" alt="Yatta and Waxwell Duo"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1buttonsona.png" alt="Button Sona"></div>
