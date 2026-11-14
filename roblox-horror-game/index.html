@@ -28,7 +28,7 @@
       background-color: #140c0e;
       border: 1px solid #3d181e;
       border-radius: 12px;
-      max-width: 900px;
+      max-width: 960px;
       width: 100%;
       padding: 40px 32px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(153, 27, 27, 0.15);
@@ -62,7 +62,7 @@
       color: #d1baba;
       font-size: 1.08rem;
       margin-bottom: 28px;
-      max-width: 600px;
+      max-width: 620px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -87,10 +87,10 @@
       box-shadow: 0 8px 25px rgba(220, 38, 38, 0.65);
     }
 
-    /* Gallery Section */
+    /* Sections */
     .gallery-section {
-      margin-top: 36px;
-      padding-top: 28px;
+      margin-top: 38px;
+      padding-top: 30px;
       border-top: 1px solid #291216;
       text-align: left;
     }
@@ -101,14 +101,57 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #f87171;
-      margin-bottom: 16px;
+      margin-bottom: 6px;
       text-align: center;
     }
 
+    .gallery-subtitle {
+      font-size: 0.88rem;
+      color: #a68b8e;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    /* Demo Video Container */
+    .video-wrapper {
+      background-color: #0b0708;
+      border: 1px solid #3d181e;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      max-height: 480px;
+      display: block;
+      background-color: #000000;
+    }
+
+    /* Grids */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
+    }
+
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .concepts-grid,
+      .planning-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .gallery-item {
@@ -116,8 +159,10 @@
       border: 1px solid #3d181e;
       border-radius: 8px;
       overflow: hidden;
-      cursor: pointer;
+      cursor: zoom-in;
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .gallery-item:hover {
@@ -128,13 +173,40 @@
 
     .gallery-item img {
       width: 100%;
-      height: 170px;
+      height: 185px;
       object-fit: cover;
       display: block;
     }
 
+    .planning-grid .gallery-item img {
+      height: 240px;
+      object-fit: contain;
+      padding: 14px;
+      background-color: #050304;
+      image-rendering: pixelated;
+    }
+
+    .item-caption {
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e5cfcf;
+      background-color: #11090b;
+      border-top: 1px solid #291216;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .zoom-hint {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #f87171;
+      opacity: 0.85;
+    }
+
     .direct-link {
-      margin-top: 32px;
+      margin-top: 36px;
       padding-top: 20px;
       border-top: 1px solid #291216;
       font-size: 0.85rem;
@@ -151,29 +223,127 @@
       text-decoration: underline;
     }
 
-    /* Lightbox Modal */
+    /* Zoomable Lightbox Modal */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(5, 3, 4, 0.94);
       align-items: center;
       justify-content: center;
-      padding: 24px;
       z-index: 1000;
-      cursor: zoom-out;
+      overflow: hidden;
+      user-select: none;
     }
 
     .lightbox.active {
       display: flex;
     }
 
+    .lightbox-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+
     .lightbox img {
-      max-width: 95%;
-      max-height: 90vh;
+      max-width: 90vw;
+      max-height: 84vh;
       border: 2px solid #5c1d26;
       border-radius: 8px;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.95);
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+      pointer-events: none;
+    }
+
+    .lightbox img.pixelated {
+      image-rendering: pixelated;
+    }
+
+    .lightbox-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #140c0e;
+      border: 1px solid #4a1c24;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85);
+      z-index: 1002;
+    }
+
+    .lightbox-btn {
+      background-color: #261115;
+      color: #f3e8e8;
+      border: 1px solid #5c1d26;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .lightbox-btn:hover {
+      background-color: #b91c1c;
+      color: #ffffff;
+    }
+
+    .zoom-level {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #f87171;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .lightbox-caption {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      background-color: rgba(20, 12, 14, 0.9);
+      border: 1px solid #3d181e;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f3e8e8;
+      z-index: 1002;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background-color: #261115;
+      border: 1px solid #5c1d26;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+    }
+
+    .lightbox-close:hover {
+      background-color: #b91c1c;
     }
   </style>
 </head>
@@ -195,22 +365,93 @@
       Play MEAT MAZE on Roblox
     </a>
 
+    <!-- Gameplay Demo Video -->
     <section class="gallery-section">
-      <h2 class="gallery-title">Screenshots & Development</h2>
+      <h2 class="gallery-title">Gameplay Demo</h2>
+      <p class="gallery-subtitle">First-person walkthrough through the flesh corridors.</p>
+      <div class="video-wrapper">
+        <video controls preload="metadata" playsinline>
+          <source src="meat maze demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Maze Planning Structure -->
+    <section class="gallery-section">
+      <h2 class="gallery-title">Maze Planning Structure</h2>
+      <p class="gallery-subtitle">Top-down layout blueprints and multi-floor basement progression. Click any map to enlarge and zoom in.</p>
+      <div class="planning-grid">
+        <div class="gallery-item" onclick="openLightbox('maze1.png', 'Maze Planning — Levels 1–4 (Main & Basements)', true)">
+          <img src="maze1.png" alt="Maze Planning Structure 1">
+          <div class="item-caption">
+            <span>Levels 1–4 Blueprint (Main &amp; Basements)</span>
+            <span class="zoom-hint">Click to Zoom</span>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('maze 2.png', 'Maze Planning — Expanded Labyrinth Grid', true)">
+          <img src="maze 2.png" alt="Maze Planning Structure 2">
+          <div class="item-caption">
+            <span>Expanded Labyrinth Grid Layout</span>
+            <span class="zoom-hint">Click to Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Initial Meat Maze Concepts -->
+    <section class="gallery-section">
+      <h2 class="gallery-title">Initial Meat Maze Concepts</h2>
+      <p class="gallery-subtitle">Early Roblox Studio blockouts, layout iterations, and unlit full-map views.</p>
+      <div class="concepts-grid">
+        <div class="gallery-item" onclick="openLightbox('maze1concept.png', 'Maze 1 Concept', false)">
+          <img src="maze1concept.png" alt="Maze 1 Concept">
+          <div class="item-caption">
+            <span>Maze 1 Concept</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('maze2concept.png', 'Maze 2 Concept', false)">
+          <img src="maze2concept.png" alt="Maze 2 Concept">
+          <div class="item-caption">
+            <span>Maze 2 Concept</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('mazefinalconcept.png', 'Final Maze Concept', false)">
+          <img src="mazefinalconcept.png" alt="Final Maze Concept">
+          <div class="item-caption">
+            <span>Final Maze Concept</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox('mazenofog.png', 'Full Map (No Fog)', false)">
+          <img src="mazenofog.png" alt="Map Without Any Fog">
+          <div class="item-caption">
+            <span>Full Map (No Fog)</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots & Development -->
+    <section class="gallery-section">
+      <h2 class="gallery-title">Screenshots &amp; Development</h2>
       <div class="gallery-grid">
-        <div class="gallery-item" onclick="openLightbox('img1.png')">
+        <div class="gallery-item" onclick="openLightbox('img1.png', 'MEAT MAZE Screenshot 1', false)">
           <img src="img1.png" alt="MEAT MAZE Screenshot 1">
         </div>
-        <div class="gallery-item" onclick="openLightbox('img2.png')">
+        <div class="gallery-item" onclick="openLightbox('img2.png', 'MEAT MAZE Screenshot 2', false)">
           <img src="img2.png" alt="MEAT MAZE Screenshot 2">
         </div>
-        <div class="gallery-item" onclick="openLightbox('img3.png')">
+        <div class="gallery-item" onclick="openLightbox('img3.png', 'MEAT MAZE Screenshot 3', false)">
           <img src="img3.png" alt="MEAT MAZE Screenshot 3">
         </div>
-        <div class="gallery-item" onclick="openLightbox('img4.png')">
+        <div class="gallery-item" onclick="openLightbox('img4.png', 'MEAT MAZE Screenshot 4', false)">
           <img src="img4.png" alt="MEAT MAZE Screenshot 4">
         </div>
-        <div class="gallery-item" onclick="openLightbox('img5.png')">
+        <div class="gallery-item" onclick="openLightbox('img5.png', 'MEAT MAZE Screenshot 5', false)">
           <img src="img5.png" alt="MEAT MAZE Screenshot 5">
         </div>
       </div>
@@ -228,19 +469,124 @@
     </div>
   </main>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Full size screenshot">
+  <!-- Interactive Zoom & Pan Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-caption" id="lightbox-caption">Image Preview</div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+
+    <div class="lightbox-stage" id="lightbox-stage">
+      <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+
+    <div class="lightbox-controls">
+      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+      <span class="zoom-level" id="zoom-level">100%</span>
+      <button class="lightbox-btn" onclick="adjustZoom(0.5)">+</button>
+      <button class="lightbox-btn" onclick="resetZoom()">Reset</button>
+    </div>
   </div>
 
   <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('active');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const zoomLevelText = document.getElementById('zoom-level');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    function updateTransform() {
+      lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function openLightbox(src, title, isPixelated) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = title || 'Full Resolution Preview';
+      lightboxImg.classList.toggle('pixelated', Boolean(isPixelated));
+      resetZoom();
+      lightbox.classList.add('active');
     }
 
     function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
+      lightbox.classList.remove('active');
+      resetZoom();
     }
+
+    function adjustZoom(delta) {
+      scale = Math.min(Math.max(1, scale + delta), 6);
+      if (scale === 1) {
+        translateX = 0;
+        translateY = 0;
+      }
+      updateTransform();
+    }
+
+    function resetZoom() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    // Mouse wheel zoom
+    lightboxStage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.35 : -0.35;
+      adjustZoom(delta);
+    }, { passive: false });
+
+    // Double-click to toggle 2.5x zoom
+    lightboxStage.addEventListener('dblclick', () => {
+      if (scale > 1) {
+        resetZoom();
+      } else {
+        scale = 2.5;
+        updateTransform();
+      }
+    });
+
+    // Click and drag to pan when zoomed in
+    lightboxStage.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      moved = false;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      lightboxStage.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      moved = true;
+      if (scale > 1) {
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      }
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      lightboxStage.classList.remove('dragging');
+      // Close lightbox if user clicked the dark backdrop without dragging while unzoomed
+      if (!moved && scale === 1 && e.target === lightboxStage) {
+        closeLightbox();
+      }
+    });
+
+    // Escape key closes lightbox
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
   </script>
 
 </body>
