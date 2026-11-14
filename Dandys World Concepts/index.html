@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dandy's World Concept</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0e0e11;
+      color: #f4f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 40px 20px 80px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #26262e;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 4px solid #7c5cff;
+      color: #ffffff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .sticker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 16px;
+    }
+
+    .art-card {
+      background-color: #18181f;
+      border: 1px solid #2a2a35;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    .art-card:hover {
+      transform: translateY(-4px);
+      border-color: #7c5cff;
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Lightbox Overlay */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 28px;
+      color: #ffffff;
+      font-size: 2.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Dandy's World Concept</h1>
+    </header>
+
+    <!-- Section 1: Character Creation Concepts -->
+    <section>
+      <h2>Character Creation Concepts</h2>
+      <div class="gallery-grid">
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1griffin.png" alt="Gryphellia the Griffin"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1trio.png" alt="Lacey, Strix, and Gryphellia Trio"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1hippogriff.png" alt="Strix the Hippogriff"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1lacey.png" alt="Lacey the Spider"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1daycare.png" alt="Daycare Group"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1quill.png" alt="Quillcy"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1ruler.png" alt="Ruler Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitz.png" alt="Blitz Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1paige.png" alt="Paige Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1mouse.png" alt="Lab Mouse Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1firefly.png" alt="Lucy the Firefly"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1buildblock.png" alt="Tumble the Building Block Box"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1snake.png" alt="Snoozle the Snake"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1cat.png" alt="Lily the Two-Tailed Cat"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1band.png" alt="Bandage Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1oil.png" alt="Medicinal Oil Bottle Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1rubix.png" alt="Rubik's Cube Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1cookie.png" alt="Fortune Cookie Character Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1sparrows.png" alt="Sparrow Twins Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1water.png" alt="Brook Water Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1pin.png" alt="Pincushion Doll Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1teaganvalentine.png" alt="Rosy Bouquet Teagan Skin"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlerodgerskin.png" alt="Elf Helper Toodles and Toy Maker Rodger"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1goobscrapschristmas.png" alt="Christmas Goob and Scraps"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattagourdy.png" alt="Yatta and Gourdy"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1shellyastrogp.png" alt="Starry Shelly and Astro"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1astroandshelly.png" alt="Winter Astro and Shelly"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlehalloween.png" alt="Halloween Toodles"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattasona.png" alt="Yatta Sona"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1gingerskin.png" alt="Ginger Skin Concept"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitzchristmasskin.png" alt="Snowball Thrower Blitz Skins"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1eastertishaskin.png" alt="Easter Bunny Tisha Skin"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattaten.png" alt="Yatta and Waxwell"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1oppawax.png" alt="Yatta and Waxwell Duo"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1buttonsona.png" alt="Button Sona"></div>
+      </div>
+    </section>
+
+    <!-- Section 2: Dandys World Character Stickers Concepts -->
+    <section>
+      <h2>Dandys World Character Stickers Concepts</h2>
+      <div class="sticker-grid">
+        <div class="art-card" onclick="openLightbox(this)"><img src="10shelly.png" alt="Shelly Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10pebble.png" alt="Pebble Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10sprout.png" alt="Sprout Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10astro.png" alt="Astro Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10vee.png" alt="Vee Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10bobette.png" alt="Bobette Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10bassie.png" alt="Bassie Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10gourdy.png" alt="Gourdy Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10waxwell.png" alt="Waxwell Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10cosmo.png" alt="Cosmo Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10eclipse.png" alt="Eclipse Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10yatta.png" alt="Yatta Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10looey.png" alt="Looey Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10brightney.png" alt="Brightney Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10flutter.png" alt="Flutter Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10soulvester.png" alt="Soulvester Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10finn.png" alt="Finn Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10brusha.png" alt="Brusha Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10ginger.png" alt="Ginger Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10gigi.png" alt="Gigi Sticker"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="10goob.png" alt="Goob Sticker"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged artwork">
+  </div>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
