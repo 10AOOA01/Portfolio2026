@@ -12,47 +12,65 @@
     }
 
     body {
-      background-color: #0e0e11;
+      background-color: #13141a;
       color: #f4f4f6;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      padding: 40px 20px 80px;
+      padding: 60px 24px 90px;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1180px;
       margin: 0 auto;
     }
 
     header {
       text-align: center;
-      margin-bottom: 50px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #26262e;
+      margin-bottom: 56px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background-color: rgba(124, 92, 255, 0.14);
+      border: 1px solid rgba(124, 92, 255, 0.45);
+      color: #a892ff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 18px;
     }
 
     header h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #8f93a2;
+      font-size: 0.95rem;
     }
 
     section {
-      margin-bottom: 60px;
+      margin-bottom: 64px;
     }
 
     section h2 {
-      font-size: 1.4rem;
-      font-weight: 600;
+      font-size: 1.35rem;
+      font-weight: 800;
       margin-bottom: 20px;
-      padding-left: 12px;
-      border-left: 4px solid #7c5cff;
       color: #ffffff;
+      letter-spacing: -0.2px;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
     }
 
@@ -62,7 +80,17 @@
       gap: 20px;
     }
 
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
     @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .gallery-grid,
       .sticker-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
@@ -70,21 +98,21 @@
     }
 
     .art-card {
-      background-color: #18181f;
-      border: 1px solid #2a2a35;
-      border-radius: 10px;
+      background-color: #1c1e26;
+      border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       aspect-ratio: 1 / 1;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     }
 
     .art-card:hover {
       transform: translateY(-4px);
-      border-color: #7c5cff;
+      box-shadow: 0 10px 26px rgba(124, 92, 255, 0.22);
     }
 
     .art-card img {
@@ -113,8 +141,8 @@
     .lightbox img {
       max-width: 92vw;
       max-height: 90vh;
-      border-radius: 8px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
     }
 
     .lightbox-close {
@@ -134,7 +162,9 @@
 
   <div class="container">
     <header>
+      <div class="pill-badge">Character Design &amp; Sticker Concepts</div>
       <h1>Dandy's World Concept</h1>
+      <p>Click any artwork to view in full resolution.</p>
     </header>
 
     <!-- Section 1: Character Creation Concepts -->
@@ -165,14 +195,14 @@
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1teaganvalentine.png" alt="Rosy Bouquet Teagan Skin"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlerodgerskin.png" alt="Elf Helper Toodles and Toy Maker Rodger"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1goobscrapschristmas.png" alt="Christmas Goob and Scraps"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitzchristmasskin.png" alt="Yatta and Gourdy"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattagourdy.png" alt="Yatta and Gourdy"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1shellyastrogp.png" alt="Starry Shelly and Astro"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1astroandshelly.png" alt="Winter Astro and Shelly"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1toodlehalloween.png" alt="Halloween Toodles"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1eastertishaskin.png" alt="Yatta Sona"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattasona.png" alt="Yatta Sona"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1gingerskin.png" alt="Ginger Skin Concept"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattagourdy.png" alt="Snowball Thrower Blitz Skins"></div>
-        <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattasona.png" alt="Easter Bunny Tisha Skin"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1blitzchristmasskin.png" alt="Snowball Thrower Blitz Skins"></div>
+        <div class="art-card" onclick="openLightbox(this)"><img src="dw1eastertishaskin.png" alt="Easter Bunny Tisha Skin"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1yattaten.png" alt="Yatta and Waxwell"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1oppawax.png" alt="Yatta and Waxwell Duo"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1buttonsona.png" alt="Button Sona"></div>
