@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skies of Aetheris — Worldbuilding Guide &amp; Character Showcase</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #090b12;
+      background-image:
+        radial-gradient(circle at 22% 0%, rgba(96, 165, 250, 0.14) 0%, rgba(9, 11, 18, 0) 50%),
+        radial-gradient(circle at 78% 0%, rgba(251, 191, 36, 0.12) 0%, rgba(9, 11, 18, 0) 50%);
+      background-repeat: no-repeat;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 64px 24px 96px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Centered Hero Header */
+    header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background-color: rgba(96, 165, 250, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #60a5fa;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 2.55rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    header h1 span {
+      background: linear-gradient(90deg, #60a5fa, #c084fc, #fbbf24);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* Outer Section Panel Cards */
+    .section-card {
+      background-color: #111521;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 4px;
+    }
+
+    .section-eyebrow.sun {
+      color: #fbbf24;
+    }
+
+    .section-eyebrow.starlight {
+      color: #c084fc;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .section-desc {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .meta-tag {
+      background-color: #090b12;
+      border: 1px solid #273549;
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* Grids */
+    .renders-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .interactions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .section-header {
+        flex-direction: column;
+      }
+      .renders-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 1.95rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .interactions-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    /* Inner Framed Cards */
+    .art-card {
+      background-color: #090b12;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .art-card:hover {
+      transform: translateY(-3px);
+      border-color: #60a5fa;
+      box-shadow: 0 8px 22px rgba(96, 165, 250, 0.2);
+    }
+
+    .art-card.sun-accent:hover {
+      border-color: #fbbf24;
+      box-shadow: 0 8px 22px rgba(251, 191, 36, 0.2);
+    }
+
+    .art-card.star-accent:hover {
+      border-color: #c084fc;
+      box-shadow: 0 8px 22px rgba(192, 132, 252, 0.2);
+    }
+
+    .renders-grid .art-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .book-grid .art-card img {
+      width: 100%;
+      height: 310px;
+      object-fit: contain;
+      background-color: #e6e3dd;
+      padding: 8px;
+      display: block;
+    }
+
+    .art-grid .art-card img,
+    .interactions-grid .art-card img {
+      width: 100%;
+      height: 270px;
+      object-fit: contain;
+      background-color: #dfd7ce;
+      padding: 10px;
+      display: block;
+    }
+
+    .art-card img.dark-bg {
+      background-color: #05070b;
+    }
+
+    .art-card img.white-bg {
+      background-color: #ffffff;
+    }
+
+    .item-caption {
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      background-color: #0d111b;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zoom-hint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #60a5fa;
+      white-space: nowrap;
+    }
+
+    .sun-accent .zoom-hint {
+      color: #fbbf24;
+    }
+
+    .star-accent .zoom-hint {
+      color: #c084fc;
+    }
+
+    /* Interactive Zoom & Pan Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 11, 0.94);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 84vh;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.9);
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+      pointer-events: none;
+    }
+
+    .lightbox-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #111521;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85);
+      z-index: 1002;
+    }
+
+    .lightbox-btn {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .lightbox-btn:hover {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+
+    .zoom-level {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #60a5fa;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .lightbox-caption {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      background-color: rgba(17, 21, 33, 0.92);
+      border: 1px solid #334155;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      z-index: 1002;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+    }
+
+    .lightbox-close:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="pill-badge">Digital Book &amp; Worldbuilding Archive</div>
+      <h1><span>Skies of Aetheris</span></h1>
+      <p>Originally conceptualized as a story-based exploration game on Roblox, Skies of Aetheris was later transformed into an illustrated digital book—featuring a complete Character Creation manual, faction lore for the Moon, Sun, Cloud, and Neutral inhabitants, 3D Studio renders, and character artwork.</p>
+    </header>
+
+    <!-- Section 1: 3D Character Renders -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Showcase 01</span>
+          <h2>Roblox Studio Character Renders</h2>
+          <p class="section-desc">3D environmental and character scenes created during the game development phase.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">3 Renders</span>
+          <span class="meta-tag">Roblox Studio</span>
+        </div>
+      </div>
+
+      <div class="renders-grid">
+        <div class="art-card star-accent" onclick="openLightbox('soalunara.png', 'Lunara Lightstar — Starlight Tailor Workshop Render')">
+          <img src="soalunara.png" alt="Lunara Lightstar Roblox Render">
+          <div class="item-caption">
+            <span>Lunara Lightstar</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('soastar.png', 'Starburst Skydance — Sun Faction Pillar Render')">
+          <img src="soastar.png" alt="Starburst Skydance Roblox Render">
+          <div class="item-caption">
+            <span>Starburst Skydance</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('soamoonchil.png', 'Moonchill Blight — Moon Faction Spire Render')">
+          <img src="soamoonchil.png" alt="Moonchill Blight Roblox Render">
+          <div class="item-caption">
+            <span>Moonchill Blight</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Character Creation Digital Book -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow starlight">Digital Guide 02</span>
+          <h2>Character Creation Manual</h2>
+          <p class="section-desc">Complete 7-page visual handbook covering colour rules, accessories, Neutrals, Moon Faction, Sun Faction, and Cloud People.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">7 Pages</span>
+          <span class="meta-tag">Worldbuilding &amp; Rules</span>
+        </div>
+      </div>
+
+      <div class="book-grid">
+        <div class="art-card star-accent" onclick="openLightbox('Skies of Aetheris_ Character Creation-1.png', 'Page 1 — Introduction &amp; Colour Placements')">
+          <img src="Skies of Aetheris_ Character Creation-1.png" alt="Skies of Aetheris Character Creation Page 1">
+          <div class="item-caption">
+            <span>Page 1 — Colour Placements</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('Skies of Aetheris_ Character Creation-2.png', 'Page 2 — Accessories &amp; Neutrals Lore')">
+          <img src="Skies of Aetheris_ Character Creation-2.png" alt="Skies of Aetheris Character Creation Page 2">
+          <div class="item-caption">
+            <span>Page 2 — Accessories &amp; Neutrals</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('Skies of Aetheris_ Character Creation-3.png', 'Page 3 — Barrier Effects &amp; Neutral Designs')">
+          <img src="Skies of Aetheris_ Character Creation-3.png" alt="Skies of Aetheris Character Creation Page 3">
+          <div class="item-caption">
+            <span>Page 3 — Neutral Designs</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('Skies of Aetheris_ Character Creation-4.png', 'Page 4 — Moon Faction &amp; Races')">
+          <img src="Skies of Aetheris_ Character Creation-4.png" alt="Skies of Aetheris Character Creation Page 4">
+          <div class="item-caption">
+            <span>Page 4 — Moon Faction</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('Skies of Aetheris_ Character Creation-5.png', 'Page 5 — Moon Faction Designs &amp; Sun Faction Intro')">
+          <img src="Skies of Aetheris_ Character Creation-5.png" alt="Skies of Aetheris Character Creation Page 5">
+          <div class="item-caption">
+            <span>Page 5 — Moon Designs &amp; Sun Intro</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('Skies of Aetheris_ Character Creation-6.png', 'Page 6 — Sun Faction Appearance &amp; Races')">
+          <img src="Skies of Aetheris_ Character Creation-6.png" alt="Skies of Aetheris Character Creation Page 6">
+          <div class="item-caption">
+            <span>Page 6 — Sun Faction Races</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('Skies of Aetheris_ Character Creation-7.png', 'Page 7 — Sun Faction Designs &amp; Cloud People')">
+          <img src="Skies of Aetheris_ Character Creation-7.png" alt="Skies of Aetheris Character Creation Page 7">
+          <div class="item-caption">
+            <span>Page 7 — Sun Designs &amp; Cloud People</span>
+            <span class="zoom-hint">Read</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Character Illustrations & Cast Sheets -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow sun">Illustrations 03</span>
+          <h2>Character Portraits &amp; Cast Art</h2>
+          <p class="section-desc">2D character portraits across the Sun, Moon, Star, and Cloud inhabitants of Aetheria.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">7 Artworks</span>
+          <span class="meta-tag">2D Character Art</span>
+        </div>
+      </div>
+
+      <div class="art-grid">
+        <div class="art-card star-accent" onclick="openLightbox('soachar4.png', 'Lunara Lightstar — Starlight Fabric Sketch')">
+          <img src="soachar4.png" alt="Lunara Lightstar Character Sketch">
+          <div class="item-caption">
+            <span>Lunara Lightstar — Portrait</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card star-accent" onclick="openLightbox('soachar2.png', 'Moon Faction — Crescent &amp; Stars Portrait')">
+          <img src="soachar2.png" alt="Moon Faction Character Portrait">
+          <div class="item-caption">
+            <span>Moon Faction — Crescent Portrait</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('soachar1.png', 'Sun &amp; Cloud Faction — Sunset Portrait')">
+          <img src="soachar1.png" alt="Sun and Cloud Character Portrait">
+          <div class="item-caption">
+            <span>Sunset Faction — Portrait</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('soachar5.png', 'Enif — Sun Faction Character Portrait')">
+          <img class="white-bg" src="soachar5.png" alt="Enif Sun Faction Character Art">
+          <div class="item-caption">
+            <span>Enif — Sun Faction</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('soacar3cloud.png', 'Cloud People — Aetheria Character Portrait')">
+          <img class="dark-bg" src="soacar3cloud.png" alt="Cloud People Character Art">
+          <div class="item-caption">
+            <span>Cloud People — Portrait</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('soachar6.png', 'Mistbeam — Cloud People Character Sketch')">
+          <img src="soachar6.png" alt="Mistbeam Cloud Character Sketch">
+          <div class="item-caption">
+            <span>Mistbeam — Cloud Sketch</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card star-accent" onclick="openLightbox('soaaeroraihoku.png', 'Aero, Rai &amp; Hoku — Trio Lineup')">
+          <img class="white-bg" src="soaaeroraihoku.png" alt="Aero Rai and Hoku Character Lineup">
+          <div class="item-caption">
+            <span>Aero, Rai &amp; Hoku — Trio</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Character Interactions & Story Sketches -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Story &amp; Lore 04</span>
+          <h2>Character Interactions</h2>
+          <p class="section-desc">Dynamic character moments and cross-faction interactions from the Skies of Aetheris story.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">4 Scenes</span>
+          <span class="meta-tag">Story Sketches</span>
+        </div>
+      </div>
+
+      <div class="interactions-grid">
+        <div class="art-card star-accent" onclick="openLightbox('soacharinteraction.png', 'Lunara Lightstar &amp; Moon Faction Companion')">
+          <img src="soacharinteraction.png" alt="Lunara Lightstar and Moon Character Interaction">
+          <div class="item-caption">
+            <span>Lunara &amp; Moon Companion</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card sun-accent" onclick="openLightbox('soacharinteraction2.png', 'Starburst Skydance &amp; Cloaked Moon Resident')">
+          <img src="soacharinteraction2.png" alt="Starburst Skydance and Cloaked Character Interaction">
+          <div class="item-caption">
+            <span>Starburst &amp; Cloaked Resident</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('moonwithcloud.png', 'Moon &amp; Cloud People Interaction')">
+          <img class="white-bg" src="moonwithcloud.png" alt="Moon and Cloud Character Sketch">
+          <div class="item-caption">
+            <span>Moon &amp; Cloud Interaction</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card star-accent" onclick="openLightbox('starwithvoid.png', 'Starburst &amp; Void Encounter')">
+          <img class="white-bg" src="starwithvoid.png" alt="Starburst and Void Character Sketch">
+          <div class="item-caption">
+            <span>Starburst &amp; Void Encounter</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Zoom & Pan Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-caption" id="lightbox-caption">Preview</div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+
+    <div class="lightbox-stage" id="lightbox-stage">
+      <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+
+    <div class="lightbox-controls">
+      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+      <span class="zoom-level" id="zoom-level">100%</span>
+      <button class="lightbox-btn" onclick="adjustZoom(0.5)">+</button>
+      <button class="lightbox-btn" onclick="resetZoom()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const zoomLevelText = document.getElementById('zoom-level');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    function updateTransform() {
+      lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function openLightbox(src, title) {
+      lightboxImg.src = src;
+      lightboxCaption.innerHTML = title || 'Full Resolution Preview';
+      resetZoom();
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      resetZoom();
+    }
+
+    function adjustZoom(delta) {
+      scale = Math.min(Math.max(1, scale + delta), 6);
+      if (scale === 1) {
+        translateX = 0;
+        translateY = 0;
+      }
+      updateTransform();
+    }
+
+    function resetZoom() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    lightboxStage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.35 : -0.35;
+      adjustZoom(delta);
+    }, { passive: false });
+
+    lightboxStage.addEventListener('dblclick', () => {
+      if (scale > 1) {
+        resetZoom();
+      } else {
+        scale = 2.5;
+        updateTransform();
+      }
+    });
+
+    lightboxStage.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      moved = false;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      lightboxStage.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      moved = true;
+      if (scale > 1) {
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      }
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      lightboxStage.classList.remove('dragging');
+      if (!moved && scale === 1 && e.target === lightboxStage) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
