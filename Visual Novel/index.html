@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monsterraunt — Visual Novel Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0708;
+      background-image: radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.16) 0%, rgba(11, 7, 8, 0) 55%);
+      background-repeat: no-repeat;
+      color: #f3e8e8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 64px 24px 96px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Centered Hero Header */
+    header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background-color: rgba(225, 29, 72, 0.14);
+      border: 1px solid rgba(244, 63, 94, 0.42);
+      color: #fb7185;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 2.45rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    header h1 span {
+      color: #f43f5e;
+    }
+
+    header p {
+      color: #b89e9e;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* Outer Section Panel Cards */
+    .section-card {
+      background-color: #140c0e;
+      border: 1px solid #33151a;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #291115;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #fb7185;
+      margin-bottom: 4px;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .section-desc {
+      color: #b89e9e;
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .meta-tag {
+      background-color: #0b0708;
+      border: 1px solid #3d181e;
+      color: #d6bcbc;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* Grids */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .screenshots-grid .featured-wide {
+      grid-column: span 2;
+    }
+
+    .code-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .section-header {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 680px) {
+      header h1 {
+        font-size: 1.95rem;
+      }
+      .section-card {
+        padding: 20px;
+      }
+      .screenshots-grid,
+      .code-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .screenshots-grid .featured-wide {
+        grid-column: span 1;
+      }
+    }
+
+    /* Inner Framed Cards */
+    .art-card {
+      background-color: #0b0708;
+      border: 1px solid #33151a;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .art-card:hover {
+      transform: translateY(-3px);
+      border-color: #f43f5e;
+      box-shadow: 0 8px 22px rgba(244, 63, 94, 0.25);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background-color: #080506;
+      display: block;
+    }
+
+    .screenshots-grid .featured-wide img {
+      height: 320px;
+    }
+
+    .code-grid .art-card img {
+      height: 240px;
+      object-fit: cover;
+      object-position: left top;
+    }
+
+    .item-caption {
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #f3e8e8;
+      background-color: #10090b;
+      border-top: 1px solid #291115;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zoom-hint {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fb7185;
+      white-space: nowrap;
+    }
+
+    /* Interactive Zoom & Pan Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 3, 4, 0.94);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+
+    .lightbox-stage.dragging {
+      cursor: grabbing;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 84vh;
+      border: 2px solid #5c1d26;
+      border-radius: 10px;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.9);
+      transform-origin: center center;
+      transition: transform 0.08s ease-out;
+      pointer-events: none;
+    }
+
+    .lightbox-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #140c0e;
+      border: 1px solid #4a1c24;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85);
+      z-index: 1002;
+    }
+
+    .lightbox-btn {
+      background-color: #261115;
+      color: #f3e8e8;
+      border: 1px solid #5c1d26;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .lightbox-btn:hover {
+      background-color: #e11d48;
+      color: #ffffff;
+    }
+
+    .zoom-level {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fb7185;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .lightbox-caption {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      background-color: rgba(20, 12, 14, 0.92);
+      border: 1px solid #3d181e;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f3e8e8;
+      z-index: 1002;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background-color: #261115;
+      border: 1px solid #5c1d26;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+    }
+
+    .lightbox-close:hover {
+      background-color: #e11d48;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="pill-badge">Interactive Visual Novel</div>
+      <h1>Monster<span>raunt</span></h1>
+      <p>A vampire countess needs a waitress. A monster hunter needs a way in. Neither of them can carry a tray. Built from scratch in HTML, CSS, and JavaScript with branching dialogue and Suspicion/Charm stat tracking.</p>
+    </header>
+
+    <!-- Section 1: Gameplay & Story Scenes -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Showcase 01</span>
+          <h2>Gameplay &amp; Branching Scenes</h2>
+          <p class="section-desc">In-game screenshots featuring Renee Vance's undercover shift, Valerie's interview, kitchen prep, and werewolf guests.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">7 Screenshots</span>
+          <span class="meta-tag">Branching Narrative</span>
+        </div>
+      </div>
+
+      <div class="screenshots-grid">
+        <div class="art-card featured-wide" onclick="openLightbox('VNtitle.png', 'Monsterraunt — Title Screen')">
+          <img src="VNtitle.png" alt="Monsterraunt Title Screen">
+          <div class="item-caption">
+            <span>Title Screen — "Begin your shift"</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VN1.png', 'Opening Narration — Renee Vance')">
+          <img src="VN1.png" alt="Opening Narration Renee Vance">
+          <div class="item-caption">
+            <span>Opening — Undercover Monster Hunter</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VN2.png', 'Protagonist Sprite — Renee Vance')">
+          <img src="VN2.png" alt="Renee Vance Character Sprite">
+          <div class="item-caption">
+            <span>Renee Vance — Dining Hall Intro</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VN3.png', 'Countess Valerie — Interview Scene')">
+          <img src="VN3.png" alt="Countess Valerie Dialogue">
+          <div class="item-caption">
+            <span>Countess Valerie — Interview Dialogue</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('vn4.png', 'Kitchen Scene — Rare-Blood Risotto Choices')">
+          <img src="vn4.png" alt="Kitchen Scene Branching Choices">
+          <div class="item-caption">
+            <span>Kitchen — Rare-Blood Risotto Choices</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VN5.png', 'Table Two — Werewolf Family Encounter')">
+          <img src="VN5.png" alt="Table Two Werewolf Family Choices">
+          <div class="item-caption">
+            <span>Table Two — Werewolf Family Choices</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VN6.png', 'Ending — Hired (Suspicion & Charm Stats)')">
+          <img src="VN6.png" alt="Ending Hired Screen">
+          <div class="item-caption">
+            <span>Ending — Hired (Stat Summary)</span>
+            <span class="zoom-hint">Enlarge</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Custom Engine & Dialogue Scripting -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Showcase 02</span>
+          <h2>Custom Engine &amp; Dialogue Scripting</h2>
+          <p class="section-desc">Hand-coded HTML/CSS stage layout, keyframe animations, and JavaScript branching story state machine.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">HTML / CSS / JS</span>
+          <span class="meta-tag">Click to Zoom</span>
+        </div>
+      </div>
+
+      <div class="code-grid">
+        <div class="art-card" onclick="openLightbox('VNcoding1.png', 'Custom Stage Layout & Keyframe Animations (HTML/CSS)')">
+          <img src="VNcoding1.png" alt="Monsterraunt HTML and CSS Code">
+          <div class="item-caption">
+            <span>Stage Layout &amp; Animation CSS</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+        <div class="art-card" onclick="openLightbox('VNcoding.png', 'Branching Story Nodes & Stat Logic (JavaScript)')">
+          <img src="VNcoding.png" alt="Monsterraunt JavaScript Story Nodes">
+          <div class="item-caption">
+            <span>Story Nodes &amp; Choice Effects JS</span>
+            <span class="zoom-hint">Zoom</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Zoom & Pan Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-caption" id="lightbox-caption">Preview</div>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+
+    <div class="lightbox-stage" id="lightbox-stage">
+      <img id="lightbox-img" src="" alt="Full size preview">
+    </div>
+
+    <div class="lightbox-controls">
+      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+      <span class="zoom-level" id="zoom-level">100%</span>
+      <button class="lightbox-btn" onclick="adjustZoom(0.5)">+</button>
+      <button class="lightbox-btn" onclick="resetZoom()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const zoomLevelText = document.getElementById('zoom-level');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    function updateTransform() {
+      lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      zoomLevelText.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function openLightbox(src, title) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = title || 'Full Resolution Preview';
+      resetZoom();
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      resetZoom();
+    }
+
+    function adjustZoom(delta) {
+      scale = Math.min(Math.max(1, scale + delta), 6);
+      if (scale === 1) {
+        translateX = 0;
+        translateY = 0;
+      }
+      updateTransform();
+    }
+
+    function resetZoom() {
+      scale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateTransform();
+    }
+
+    lightboxStage.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.35 : -0.35;
+      adjustZoom(delta);
+    }, { passive: false });
+
+    lightboxStage.addEventListener('dblclick', () => {
+      if (scale > 1) {
+        resetZoom();
+      } else {
+        scale = 2.5;
+        updateTransform();
+      }
+    });
+
+    lightboxStage.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      moved = false;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      lightboxStage.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      moved = true;
+      if (scale > 1) {
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+      }
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      lightboxStage.classList.remove('dragging');
+      if (!moved && scale === 1 && e.target === lightboxStage) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+</body>
+</html>
