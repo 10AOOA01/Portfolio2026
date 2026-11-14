@@ -12,75 +12,133 @@
     }
 
     body {
-      background-color: #13141a;
+      background-color: #121318;
+      background-image: radial-gradient(circle at 50% 0%, rgba(124, 92, 255, 0.14) 0%, rgba(18, 19, 24, 0) 52%);
+      background-repeat: no-repeat;
       color: #f4f4f6;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      padding: 60px 24px 90px;
+      padding: 64px 24px 96px;
     }
 
     .container {
-      max-width: 1180px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
+    /* Centered Hero Header */
     header {
       text-align: center;
-      margin-bottom: 56px;
+      max-width: 660px;
+      margin: 0 auto 56px;
     }
 
     .pill-badge {
       display: inline-block;
-      background-color: rgba(124, 92, 255, 0.14);
-      border: 1px solid rgba(124, 92, 255, 0.45);
+      background-color: rgba(124, 92, 255, 0.12);
+      border: 1px solid rgba(124, 92, 255, 0.4);
       color: #a892ff;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 1.6px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 999px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     header h1 {
-      font-size: 2.6rem;
+      font-size: 2.35rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.4px;
       color: #ffffff;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     header p {
-      color: #8f93a2;
-      font-size: 0.95rem;
+      color: #9398a8;
+      font-size: 0.94rem;
+      line-height: 1.6;
     }
 
-    section {
-      margin-bottom: 64px;
+    /* Outer Panel Cards matching the reference pages */
+    .section-card {
+      background-color: #181a22;
+      border: 1px solid #262936;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 36px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
     }
 
-    section h2 {
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #242734;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #9c84ff;
+      margin-bottom: 4px;
+    }
+
+    .section-header h2 {
       font-size: 1.35rem;
       font-weight: 800;
-      margin-bottom: 20px;
       color: #ffffff;
       letter-spacing: -0.2px;
     }
 
+    .section-desc {
+      color: #9398a8;
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .meta-tag {
+      background-color: #121318;
+      border: 1px solid #2a2e3d;
+      color: #b4b9c8;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* Grids: 5 columns x 7 rows = 35 items | 3 columns x 7 rows = 21 items */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
+      gap: 16px;
     }
 
     .sticker-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
     @media (max-width: 900px) {
+      .section-header {
+        flex-direction: column;
+      }
       .gallery-grid {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -88,31 +146,36 @@
 
     @media (max-width: 600px) {
       header h1 {
-        font-size: 2rem;
+        font-size: 1.9rem;
+      }
+      .section-card {
+        padding: 20px;
       }
       .gallery-grid,
       .sticker-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
+        gap: 12px;
       }
     }
 
+    /* Inner Framed Artwork Tiles */
     .art-card {
-      background-color: #1c1e26;
-      border-radius: 12px;
+      background-color: #121318;
+      border: 1px solid #262936;
+      border-radius: 10px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       aspect-ratio: 1 / 1;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     }
 
     .art-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 26px rgba(124, 92, 255, 0.22);
+      transform: translateY(-3px);
+      border-color: #7c5cff;
+      box-shadow: 0 8px 20px rgba(124, 92, 255, 0.18);
     }
 
     .art-card img {
@@ -127,7 +190,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: rgba(10, 11, 15, 0.92);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -142,7 +205,8 @@
       max-width: 92vw;
       max-height: 90vh;
       border-radius: 10px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75);
+      border: 1px solid #2e3242;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.8);
     }
 
     .lightbox-close {
@@ -162,14 +226,25 @@
 
   <div class="container">
     <header>
-      <div class="pill-badge">Character Design &amp; Sticker Concepts</div>
+      <div class="pill-badge">Character &amp; Sticker Concept Archive</div>
       <h1>Dandy's World Concept</h1>
-      <p>Click any artwork to view in full resolution.</p>
+      <p>Original character designs, seasonal skin concepts, and expressive character sticker icons. Click any piece to inspect full resolution.</p>
     </header>
 
-    <!-- Section 1: Character Creation Concepts -->
-    <section>
-      <h2>Character Creation Concepts</h2>
+    <!-- Section 1 Card: Character Creation Concepts -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Collection 01</span>
+          <h2>Character Creation Concepts</h2>
+          <p class="section-desc">Original Toon concepts, duo illustrations, and holiday skin designs.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">35 Works</span>
+          <span class="meta-tag">Characters &amp; Skins</span>
+        </div>
+      </div>
+
       <div class="gallery-grid">
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1griffin.png" alt="Gryphellia the Griffin"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="dw1trio.png" alt="Lacey, Strix, and Gryphellia Trio"></div>
@@ -209,9 +284,20 @@
       </div>
     </section>
 
-    <!-- Section 2: Dandys World Character Stickers Concepts -->
-    <section>
-      <h2>Dandys World Character Stickers Concepts</h2>
+    <!-- Section 2 Card: Dandys World Character Stickers Concepts -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Collection 02</span>
+          <h2>Dandys World Character Stickers Concepts</h2>
+          <p class="section-desc">Stylized character icon set with neon outlines and expressive poses.</p>
+        </div>
+        <div class="tag-group">
+          <span class="meta-tag">21 Stickers</span>
+          <span class="meta-tag">Icon Set</span>
+        </div>
+      </div>
+
       <div class="sticker-grid">
         <div class="art-card" onclick="openLightbox(this)"><img src="10shelly.png" alt="Shelly Sticker"></div>
         <div class="art-card" onclick="openLightbox(this)"><img src="10pebble.png" alt="Pebble Sticker"></div>
