@@ -1,72 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allyssah Jamilah Reyes Portfolio 2026</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allyssah Jamilah Reyes — Portfolio 2026</title>
   <style>
+    :root {
+      --bg-color: #141318;
+      --card-bg: #1e1c24;
+      --card-hover: #26232e;
+      --accent: #d88ca8;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #a78bfa;
+      --text-main: #f4f4f6;
+      --text-muted: #a9a7b5;
+      --border: #2f2c3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background: radial-gradient(circle at top, #231f2e 0%, var(--bg-color) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem 1.25rem 4rem;
     }
-    h1 {
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
-      margin-bottom: 24px;
+
+    .container {
+      width: 100%;
+      max-width: 1020px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
     }
-    ol {
-      padding-left: 24px;
+
+    /* Hero Header */
+    header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
     }
-    li {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #6ab0f3;
-      text-decoration: none;
-      font-size: 1.05rem;
+
+    .pill-badge {
       display: inline-block;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: background-color 0.15s ease, color 0.15s ease;
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(216, 140, 168, 0.35);
+      padding: 0.42rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
-    a:hover {
-      background-color: #1f2937;
-      color: #93c5fd;
-      text-decoration: underline;
+
+    header h1 {
+      font-size: clamp(2rem, 4.5vw, 2.85rem);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.15;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      line-height: 1.55;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+    }
+
+    .filter-btn {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.05rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+      background: var(--card-hover);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, rgba(216, 140, 168, 0.22), rgba(122, 162, 247, 0.22));
+      color: var(--text-main);
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(216, 140, 168, 0.18);
+    }
+
+    /* Project Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.35rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-number {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      opacity: 0.75;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.62rem;
+      border-radius: 999px;
+      background: rgba(122, 162, 247, 0.13);
+      color: var(--accent-blue);
+      border: 1px solid rgba(122, 162, 247, 0.28);
+    }
+
+    .card-tag.art {
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border-color: rgba(216, 140, 168, 0.3);
+    }
+
+    .card-tag.school {
+      background: rgba(167, 139, 250, 0.14);
+      color: var(--accent-purple);
+      border-color: rgba(167, 139, 250, 0.3);
+    }
+
+    .card-body h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
+      transition: color 0.15s ease;
+    }
+
+    .card:hover .card-body h2 {
+      color: var(--accent);
+    }
+
+    .card-body p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+    }
+
+    .card-footer span.arrow {
+      transition: transform 0.18s ease;
+    }
+
+    .card:hover .card-footer span.arrow {
+      transform: translateX(4px);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
 
-  <h1>Allyssah Jamilah Reyes Portfolio 2026</h1>
+  <div class="container">
+    <header>
+      <span class="pill-badge">Creative Archive &bull; 2026</span>
+      <h1>Allyssah Jamilah Reyes</h1>
+      <p>Game development, 3D modeling, character design, mini comics, audio production, and senior media &amp; design coursework.</p>
+    </header>
 
-  <ol>
-    <li><a href="roblox-horror-game/index.html">Roblox Horror Game</a></li>
-    <li><a href="FL Studio Works/index.html">FL Studio Works</a></li>
-    <li><a href="Creative Writing Works/index.html">Creative Writing Works</a></li>
-    <li><a href="Roblox Accessories in Blender/index.html">Roblox Accessories in Blender</a></li>
-    <li><a href="Illustrations Works/index.html">Character Illustrations</a></li>
-    <li><a href="Monsterraunt/index.html">Monsterraunt Level 3 Design</a></li>
-    <li><a href="Meat Maze/index.html">Meat Maze Characters</a></li>
-    <li><a href="Dandys World Concepts/index.html">Dandys World Concepts</a></li>
-    <li><a href="Conduits/index.html">Conduits</a></li>
-    <li><a href="Visual Novel/index.html">Visual Novel</a></li>
-    <li><a href="Skies of Aetheris/index.html">Skies of Aetheris</a></li>
-    <li><a href="Yr 12 Media Studies/index.html">Yr 12 Media Studies</a></li>
-    <li><a href="Yr 13 Media Studies/index.html">Yr 13 Media Studies</a></li>
-    <li><a href="Mini Comics/index.html">Mini Comics</a></li>
-    <li><a href="Yr 13 Media Studies">Yr 13 Media Studies</a></li>
-    <li><a href="character-animations.html">Character animations like walking, idle, jump, etc.</a></li>
-    <li><a href="comic strips.html">Comic strips</a></li>
-    <li><a href="character-game-sprites.html">Character game sprites for visual novel</a></li>
-    <li><a href="dandys-world-stickers.html">Dandy's World sticker drawings</a></li>
-    <li><a href="onlinesequencer-bamboo-shrine.html">OnlineSequencer music Bamboo Shrine</a></li>
-  </ol>
+    <nav class="filter-bar" aria-label="Filter portfolio projects">
+      <button type="button" class="filter-btn active" data-filter="all">All Works (14)</button>
+      <button type="button" class="filter-btn" data-filter="art">Art, Worlds &amp; Comics</button>
+      <button type="button" class="filter-btn" data-filter="gamedev">Game Dev &amp; 3D</button>
+      <button type="button" class="filter-btn" data-filter="writing-audio">Writing &amp; Audio</button>
+      <button type="button" class="filter-btn" data-filter="school">Yr 12 &amp; 13 Coursework</button>
+    </nav>
 
+    <main class="grid" id="portfolioGrid">
+      <a class="card" href="roblox-horror-game/index.html" data-category="gamedev">
+        <div class="card-top">
+          <span class="card-number">01</span>
+          <span class="card-tag">Game Dev</span>
+        </div>
+        <div class="card-body">
+          <h2>Roblox Horror Game</h2>
+          <p>Atmosphere, mechanics, and level design for an original horror experience.</p>
+        </div>
+        <div class="card-footer">
+          <span>Open Project</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="FL Studio Works/index.html" data-category="writing-audio">
+        <div class="card-top">
+          <span class="card-number">02</span>
+          <span class="card-tag">Audio</span>
+        </div>
+        <div class="card-body">
+          <h2>FL Studio Works</h2>
+          <p>Original music compositions, soundtracks, and audio production experiments.</p>
+        </div>
+        <div class="card-footer">
+          <span>Listen &amp; Explore</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Creative Writing Works/index.html" data-category="writing-audio">
+        <div class="card-top">
+          <span class="card-number">03</span>
+          <span class="card-tag">Writing</span>
+        </div>
+        <div class="card-body">
+          <h2>Creative Writing Works</h2>
+          <p>Short stories, scripts, worldbuilding lore, and narrative pieces.</p>
+        </div>
+        <div class="card-footer">
+          <span>Read Works</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Roblox Accessories in Blender/index.html" data-category="gamedev">
+        <div class="card-top">
+          <span class="card-number">04</span>
+          <span class="card-tag">3D Modeling</span>
+        </div>
+        <div class="card-body">
+          <h2>Roblox Accessories in Blender</h2>
+          <p>Custom 3D UGC assets, meshes, and textures modeled in Blender.</p>
+        </div>
+        <div class="card-footer">
+          <span>View 3D Models</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Illustrations Works/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">05</span>
+          <span class="card-tag art">Illustration</span>
+        </div>
+        <div class="card-body">
+          <h2>Character Illustrations</h2>
+          <p>Original character designs, expressive portraits, and digital artwork.</p>
+        </div>
+        <div class="card-footer">
+          <span>View Gallery</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Meat Maze/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">06</span>
+          <span class="card-tag art">Character Design</span>
+        </div>
+        <div class="card-body">
+          <h2>Meat Maze Characters</h2>
+          <p>Cast sheets and visual concepts for the Meat Maze universe.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Cast</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Dandys World Concepts/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">07</span>
+          <span class="card-tag art">Concepts</span>
+        </div>
+        <div class="card-body">
+          <h2>Dandys World Concepts</h2>
+          <p>Fan character concepts, visual explorations, and design sheets.</p>
+        </div>
+        <div class="card-footer">
+          <span>View Concepts</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Conduits/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">08</span>
+          <span class="card-tag art">Original IP</span>
+        </div>
+        <div class="card-body">
+          <h2>Conduits</h2>
+          <p>Character lore, abilities, and visual development for the Conduits series.</p>
+        </div>
+        <div class="card-footer">
+          <span>Enter World</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Skies of Aetheris/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">09</span>
+          <span class="card-tag art">Worldbuilding</span>
+        </div>
+        <div class="card-body">
+          <h2>Skies of Aetheris</h2>
+          <p>Concept art, characters, and story development for Skies of Aetheris.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Project</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Mini Comics/index.html" data-category="art">
+        <div class="card-top">
+          <span class="card-number">10</span>
+          <span class="card-tag art">Comics</span>
+        </div>
+        <div class="card-body">
+          <h2>Mini Comics</h2>
+          <p>Interactive comic readers featuring SkyWing, Carps Adventures, Conduit, and more.</p>
+        </div>
+        <div class="card-footer">
+          <span>Read Comics</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Yr 12 Media Studies/index.html" data-category="school">
+        <div class="card-top">
+          <span class="card-number">11</span>
+          <span class="card-tag school">Yr 12 Media</span>
+        </div>
+        <div class="card-body">
+          <h2>Yr 12 Media Studies</h2>
+          <p>Film production, planning documentation, and Year 12 media coursework.</p>
+        </div>
+        <div class="card-footer">
+          <span>View Coursework</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Yr 13 Media Studies/index.html" data-category="school">
+        <div class="card-top">
+          <span class="card-number">12</span>
+          <span class="card-tag school">Yr 13 Media</span>
+        </div>
+        <div class="card-body">
+          <h2>Yr 13 Media Studies</h2>
+          <p>Final film production with scene jump timestamps and 12-page annotated script.</p>
+        </div>
+        <div class="card-footer">
+          <span>Watch &amp; Read</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Visual Novel/index.html" data-category="school gamedev">
+        <div class="card-top">
+          <span class="card-number">13</span>
+          <span class="card-tag school">Yr 13 DigiTech</span>
+        </div>
+        <div class="card-body">
+          <h2>Yr 13 Digital Technology</h2>
+          <p>Interactive visual novel development, branching dialogue, and UI design.</p>
+        </div>
+        <div class="card-footer">
+          <span>View Project</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <a class="card" href="Monsterraunt/index.html" data-category="school art">
+        <div class="card-top">
+          <span class="card-number">14</span>
+          <span class="card-tag school">Yr 13 Art Design</span>
+        </div>
+        <div class="card-body">
+          <h2>Yr 13 Art Design — Monsterraunt</h2>
+          <p>Visual identity, branding, and design folio boards for Monsterraunt.</p>
+        </div>
+        <div class="card-footer">
+          <span>View Folio</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+    </main>
+
+    <footer>
+      Allyssah Jamilah Reyes &bull; Portfolio 2026
+    </footer>
+  </div>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".card");
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+        cards.forEach((card) => {
+          const categories = card.dataset.category.split(" ");
+          const match = filter === "all" || categories.includes(filter);
+          card.classList.toggle("hidden", !match);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
