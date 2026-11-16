@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoobee Coursework — Allyssah Jamilah Reyes</title>
+  <style>
+    :root {
+      --bg-color: #141318;
+      --card-bg: #1e1c24;
+      --card-hover: #26232e;
+      --accent: #d88ca8;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #a78bfa;
+      --text-main: #f4f4f6;
+      --text-muted: #a9a7b5;
+      --border: #2f2c3a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+      background: radial-gradient(circle at top, #231f2e 0%, var(--bg-color) 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.25rem 4.5rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Top Nav */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      transition: all 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text-main);
+      border-color: var(--accent);
+      background: var(--card-hover);
+      transform: translateX(-2px);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      background: rgba(167, 139, 250, 0.14);
+      color: var(--accent-purple);
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      padding: 0.42rem 1.15rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    header h1 {
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Standard Section Card */
+    .unit-section {
+      background: rgba(30, 28, 36, 0.72);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .unit-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    .unit-code {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(216, 140, 168, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(216, 140, 168, 0.3);
+    }
+
+    .unit-code.blue {
+      background: rgba(122, 162, 247, 0.14);
+      color: var(--accent-blue);
+      border-color: rgba(122, 162, 247, 0.3);
+    }
+
+    .unit-header h2 {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .unit-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* Subsections inside each Unit Standard */
+    .stage-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stage-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stage-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(122, 162, 247, 0.18);
+      color: var(--accent-blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .gallery-grid.wide {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+
+    .art-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: zoom-in;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .art-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #100f14;
+    }
+
+    .art-caption {
+      padding: 0.85rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.86rem;
+    }
+
+    .art-caption strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .art-caption span {
+      color: var(--accent-blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 9, 13, 0.92);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .lightbox img {
+      max-width: 94vw;
+      max-height: 82vh;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      margin-top: 0.9rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-bar">
+      <a class="back-link" href="../index.html">&larr; Back to Portfolio</a>
+    </div>
+
+    <header>
+      <span class="pill-badge">Yoobee Colleges &bull; NZQA Digital Technologies</span>
+      <h1>Yoobee Coursework</h1>
+      <p>Character concept development and multi-format desktop publishing solutions produced for NZQA Unit Standards 29793 and 29792. Click any image to inspect full resolution.</p>
+    </header>
+
+    <!-- UNIT STANDARD 29793 -->
+    <section class="unit-section" aria-labelledby="us-29793">
+      <div class="unit-header">
+        <span class="unit-code">NZQA Unit Standard 29793</span>
+        <h2 id="us-29793">Investigate, plan, design and create digital outcome solutions to meet the requirements of a specified brief</h2>
+        <p>Full character design pipeline for original character <strong>Maalavi</strong>—progressing from visual moodboard research and colour palette iterations through to turnarounds, expression sheets, dynamic poses, and final character presentation.</p>
+      </div>
+
+      <!-- Stage 1 -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">1</span> Visual Research &amp; Moodboard</div>
+        <div class="gallery-grid wide">
+          <figure class="art-card" data-caption="Maalavi — Concept Moodboard & Visual References">
+            <img src="1_Moodboard.png" alt="Maalavi concept moodboard featuring horn, scale, clothing, amber, and pose references" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Concept Moodboard — Maalavi</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">2</span> Colour Exploration &amp; Turnaround</div>
+        <div class="gallery-grid wide">
+          <figure class="art-card" data-caption="Maalavi — Colour Palette Variations (4 Schemes)">
+            <img src="1_colourmultiple.png" alt="Four colour palette iterations for Maalavi with swatches" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Character Colour Iterations</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="Maalavi — 4-Point Character Turnaround Sheet">
+            <img src="1_turnover.png" alt="Front, side, back, and profile turnaround sheet of Maalavi" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>4-Point Character Turnaround</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">3</span> Expressions &amp; Dynamic Poses</div>
+        <div class="gallery-grid">
+          <figure class="art-card" data-caption="Maalavi — 9-Expression Character Sheet">
+            <img src="1_9faces.png" alt="Nine facial expressions for Maalavi showing anger, sadness, joy, shock, and sleep" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>9-Expression Sheet</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="Maalavi — Dynamic Pose Study 1 (Seated)">
+            <img src="1_dynamic2.png" alt="Seated character pose illustration of Maalavi" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Dynamic Pose — Seated</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="Maalavi — Dynamic Pose Study 2 (Broken Horn)">
+            <img src="1_dynamic1.png" alt="Dramatic kneeling pose illustration of Maalavi with broken horn" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Dynamic Pose — Dramatic</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">4</span> Final Character Outcome</div>
+        <div class="gallery-grid wide">
+          <figure class="art-card" data-caption="Maalavi — Final Character Design Sheet (Front, Back & Palette)">
+            <img src="1.png" alt="Final Maalavi character sheet showing front and back views with final colour palette" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Final Character Sheet — Maalavi</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNIT STANDARD 29792 -->
+    <section class="unit-section" aria-labelledby="us-29792">
+      <div class="unit-header">
+        <span class="unit-code blue">NZQA Unit Standard 29792</span>
+        <h2 id="us-29792">Use a desktop publishing application to produce documents</h2>
+        <p>Cohesive brand collateral suite produced for <strong>EFXTech Computers</strong>—applying consistent typography, grid alignment, colour hierarchy, and print-ready layouts across a double-sided tri-fold brochure, a multi-page company newsletter, and a promotional sale flyer.</p>
+      </div>
+
+      <!-- Brochure -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">1</span> Tri-Fold Product Brochure (Outside &amp; Inside Spreads)</div>
+        <div class="gallery-grid wide">
+          <figure class="art-card" data-caption="EFXTech Tri-Fold Brochure — Outside Spread (Cover, Back Contact Panel & Inside Flap)">
+            <img src="brochurefront.png" alt="EFXTech tri-fold brochure outside spread featuring Go 3D Printer, contact panel, and cover" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Brochure — Outside Spread</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="EFXTech Tri-Fold Brochure — Inside Spread (DigiCee Glasses, KJWatch & Price List)">
+            <img src="brochure_back.png" alt="EFXTech tri-fold brochure inside spread featuring DigiCee Glasses, KJWatch wellness features, and Price List" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Brochure — Inside Spread</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Newsletter & Flyer -->
+      <div class="stage-block">
+        <div class="stage-title"><span class="stage-step">2</span> Company Newsletter (2 Pages) &amp; Promotional Flyer</div>
+        <div class="gallery-grid">
+          <figure class="art-card" data-caption="EFXTech Communicator Newsletter — Page 1">
+            <img src="newsletter (1).png" alt="EFXTech Communicator Volume 1 Issue 1 Page 1 newsletter layout" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Newsletter — Page 1</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="EFXTech Communicator Newsletter — Page 2 (Upcoming Events & Feature Continuation)">
+            <img src="newsletter (1)2.png" alt="EFXTech Communicator Page 2 featuring Upcoming Events and DigiCee Glasses continuation" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Newsletter — Page 2</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+          <figure class="art-card" data-caption="EFXTech Computers — 50% Off Massive Sale Promotional Flyer">
+            <img src="flyer.png" alt="EFXTech Computers 50% off Massive Sale one-day promotional flyer" loading="lazy" />
+            <figcaption class="art-caption">
+              <strong>Promotional Sale Flyer</strong>
+              <span>Click to Zoom</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Allyssah Jamilah Reyes &bull; Portfolio 2026
+    </footer>
+  </div>
+
+  <!-- Fullscreen Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button type="button" class="lightbox-close" id="lightboxClose">&times; Close</button>
+    <img id="lightboxImg" src="" alt="" />
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    document.querySelectorAll(".art-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const img = card.querySelector("img");
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = card.dataset.caption || img.alt;
+        lightbox.classList.add("open");
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightboxImg.src = "";
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+    });
+  </script>
+</body>
+</html>
