@@ -18,12 +18,42 @@
       color: #f3e8e8;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      padding: 64px 24px 96px;
+      padding: 32px 24px 96px;
     }
 
     .container {
       max-width: 1120px;
       margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #fb7185;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background-color: #140c0e;
+      border: 1px solid #33151a;
+      transition: all 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+      border-color: #f43f5e;
+      background-color: #261115;
+      transform: translateX(-2px);
     }
 
     /* Centered Hero Header */
@@ -344,12 +374,11 @@
 </head>
 <body>
 
-    <div class="container">
+  <div class="container">
     <div class="top-bar">
       <a class="back-link" href="../index.html">&larr; Back to Portfolio</a>
     </div>
-    
-  <div class="container">
+
     <header>
       <div class="pill-badge">Interactive Visual Novel</div>
       <h1>Monster<span>raunt</span></h1>

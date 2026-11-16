@@ -17,13 +17,43 @@
       background-image: radial-gradient(circle at 50% 0%, #2a1418 0%, #111012 75%);
       color: #f5f2f2;
       min-height: 100vh;
-      padding: 48px 20px;
+      padding: 32px 20px 64px;
       line-height: 1.65;
     }
 
     .container {
       max-width: 1080px;
       margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #f87171;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background-color: #18161a;
+      border: 1px solid #30282b;
+      transition: all 0.16s ease;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+      border-color: #dc2626;
+      background-color: #241d20;
+      transform: translateX(-2px);
     }
 
     header {
@@ -176,6 +206,10 @@
 <body>
 
   <div class="container">
+    <div class="top-bar">
+      <a class="back-link" href="../index.html">&larr; Back to Portfolio</a>
+    </div>
+
     <header>
       <span class="badge">Level 3 Design Portfolio</span>
       <h1>Monsterraunt — Design Board</h1>
