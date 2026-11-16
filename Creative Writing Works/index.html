@@ -17,13 +17,53 @@
       background-image: radial-gradient(circle at 50% 0%, #231e30 0%, #111015 75%);
       color: #f2eff7;
       min-height: 100vh;
-      padding: 44px 20px;
+      padding: 36px 20px 44px;
       line-height: 1.65;
     }
 
     .container {
       max-width: 920px;
       margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #191722;
+      border: 1px solid #2e293d;
+      color: #b4adc4;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 10px;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-3px);
+      border-color: #8b5cf6;
+      background-color: #211e2d;
+      color: #ffffff;
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: #a78bfa;
+      transition: transform 0.2s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-2px);
     }
 
     header {
@@ -189,8 +229,17 @@
 <body>
 
   <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+    </nav>
+
     <header>
-      <span class="badge">Narrative &amp; Fiction Portfolio</span>
+      <span class="badge">Narrative & Fiction Portfolio</span>
       <h1>Creative Writing — Top 3 Works</h1>
       <p class="subtitle">
         A curated showcase of my top three fiction projects spanning dark fantasy, character-driven adventure, and original worldbuilding.

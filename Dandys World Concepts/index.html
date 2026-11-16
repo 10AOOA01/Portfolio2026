@@ -18,12 +18,52 @@
       color: #f4f4f6;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      padding: 64px 24px 96px;
+      padding: 40px 24px 96px;
     }
 
     .container {
       max-width: 1120px;
       margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #181a22;
+      border: 1px solid #262936;
+      color: #9398a8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 10px;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-3px);
+      border-color: #7c5cff;
+      background-color: #1e212b;
+      color: #ffffff;
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: #a892ff;
+      transition: transform 0.2s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-2px);
     }
 
     /* Centered Hero Header */
@@ -225,8 +265,17 @@
 <body>
 
   <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+    </nav>
+
     <header>
-      <div class="pill-badge">Character &amp; Sticker Concept Archive</div>
+      <div class="pill-badge">Character & Sticker Concept Archive</div>
       <h1>Dandy's World Concept</h1>
       <p>Original character designs, seasonal skin concepts, and expressive character sticker icons. Click any piece to inspect full resolution.</p>
     </header>
@@ -241,7 +290,7 @@
         </div>
         <div class="tag-group">
           <span class="meta-tag">35 Works</span>
-          <span class="meta-tag">Characters &amp; Skins</span>
+          <span class="meta-tag">Characters & Skins</span>
         </div>
       </div>
 
@@ -326,7 +375,7 @@
 
   <!-- Lightbox Modal -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+    <span class="lightbox-close" onclick="closeLightbox(event)">×</span>
     <img id="lightbox-img" src="" alt="Enlarged artwork">
   </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conduits — Character Design &amp; Roblox Fighting Game Concept</title>
+  <title>Conduits — Character Design & Roblox Fighting Game Concept</title>
   <style>
     * {
       margin: 0;
@@ -20,12 +20,52 @@
       color: #f1f5f9;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.5;
-      padding: 64px 24px 96px;
+      padding: 40px 24px 96px;
     }
 
     .container {
       max-width: 1120px;
       margin: 0 auto;
+    }
+
+    /* Top Navigation Bar */
+    .top-nav {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #10141d;
+      border: 1px solid #1e293b;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 10px;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-3px);
+      border-color: #38bdf8;
+      background-color: #161c28;
+      color: #ffffff;
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: #38bdf8;
+      transition: transform 0.2s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-2px);
     }
 
     /* Centered Hero Header */
@@ -393,6 +433,15 @@
 <body>
 
   <div class="container">
+    <nav class="top-nav">
+      <a href="index.html" class="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+    </nav>
+
     <header>
       <div class="pill-badge">Roblox Studio Passion Project</div>
       <h1><span>Conduits</span></h1>
@@ -414,10 +463,10 @@
       </div>
 
       <div class="roster-grid">
-        <div class="art-card featured-wide" onclick="openLightbox('conduitstudio.png', 'Conduits Base Roster — Wings, Shroom &amp; Chains (Roblox Studio)')">
+        <div class="art-card featured-wide" onclick="openLightbox('conduitstudio.png', 'Conduits Base Roster — Wings, Shroom & Chains (Roblox Studio)')">
           <img src="conduitstudio.png" alt="Conduits Base Roster Wings Shroom and Chains">
           <div class="item-caption">
-            <span>Base Roster Lineup — Wings, Shroom &amp; Chains</span>
+            <span>Base Roster Lineup — Wings, Shroom & Chains</span>
             <span class="zoom-hint">Enlarge</span>
           </div>
         </div>
@@ -457,20 +506,20 @@
       <div class="section-header">
         <div>
           <span class="section-eyebrow gold">Showcase 02</span>
-          <h2>Combat VFX &amp; Action Poses</h2>
+          <h2>Combat VFX & Action Poses</h2>
           <p class="section-desc">Custom lighting, aerial motion trails, feather projectiles, and chain-slash effects captured in-engine.</p>
         </div>
         <div class="tag-group">
           <span class="meta-tag">3 Action Scenes</span>
-          <span class="meta-tag">VFX &amp; Lighting</span>
+          <span class="meta-tag">VFX & Lighting</span>
         </div>
       </div>
 
       <div class="renders-grid">
-        <div class="art-card gold-accent featured-wide" onclick="openLightbox('chainsrender.png', 'Chains — Crimson Arena &amp; Slash VFX Render')">
+        <div class="art-card gold-accent featured-wide" onclick="openLightbox('chainsrender.png', 'Chains — Crimson Arena & Slash VFX Render')">
           <img src="chainsrender.png" alt="Chains Crimson Arena VFX Render">
           <div class="item-caption">
-            <span>Chains — Crimson Arena &amp; Slash VFX Render</span>
+            <span>Chains — Crimson Arena & Slash VFX Render</span>
             <span class="zoom-hint">Enlarge</span>
           </div>
         </div>
@@ -506,10 +555,10 @@
       </div>
 
       <div class="skins-grid">
-        <div class="art-card" onclick="openLightbox('conduitskins1.png', 'Hopper Skin Ref — &ldquo;Certain Traveler&rdquo; &amp; Crystal Variant')">
+        <div class="art-card" onclick="openLightbox('conduitskins1.png', 'Hopper Skin Ref — “Certain Traveler” & Crystal Variant')">
           <img src="conduitskins1.png" alt="Hopper Skin Ref Certain Traveler">
           <div class="item-caption">
-            <span>Hopper Skin Ref — &ldquo;Certain Traveler&rdquo;</span>
+            <span>Hopper Skin Ref — “Certain Traveler”</span>
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
@@ -534,10 +583,10 @@
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
-        <div class="art-card" onclick="openLightbox('conduitskins4.png', 'Spectral Chains &amp; Seraph Wings Skin Concepts')">
+        <div class="art-card" onclick="openLightbox('conduitskins4.png', 'Spectral Chains & Seraph Wings Skin Concepts')">
           <img src="conduitskins4.png" alt="Spectral Chains and Seraph Wings Skin Concepts">
           <div class="item-caption">
-            <span>Spectral Chains &amp; Seraph Wings Concepts</span>
+            <span>Spectral Chains & Seraph Wings Concepts</span>
             <span class="zoom-hint">Zoom</span>
           </div>
         </div>
@@ -556,7 +605,7 @@
       <div class="section-header">
         <div>
           <span class="section-eyebrow gold">Illustrations 04</span>
-          <h2>Character Art &amp; Weapon Concepts</h2>
+          <h2>Character Art & Weapon Concepts</h2>
           <p class="section-desc">2D character illustrations, roster art, and early weapon explorations.</p>
         </div>
         <div class="tag-group">
@@ -629,14 +678,14 @@
   <!-- Interactive Zoom & Pan Lightbox Modal -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-caption" id="lightbox-caption">Preview</div>
-    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">×</button>
 
     <div class="lightbox-stage" id="lightbox-stage">
       <img id="lightbox-img" src="" alt="Full size preview">
     </div>
 
     <div class="lightbox-controls">
-      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">&minus;</button>
+      <button class="lightbox-btn" onclick="adjustZoom(-0.5)">−</button>
       <span class="zoom-level" id="zoom-level">100%</span>
       <button class="lightbox-btn" onclick="adjustZoom(0.5)">+</button>
       <button class="lightbox-btn" onclick="resetZoom()">Reset</button>
